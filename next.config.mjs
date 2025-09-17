@@ -63,11 +63,16 @@ const nextConfig = {
   },
   // 本番環境での最適化
   ...(process.env.NODE_ENV === 'production' && {
-    output: 'standalone',
+    output: process.env.BUILD_STANDALONE ? 'standalone' : (process.env.DEPLOY_TARGET === 'netlify' ? undefined : 'export'),
     generateEtags: false,
     httpAgentOptions: {
       keepAlive: true,
     },
+    // 静的エクスポート用の設定（ロリポップ用）
+    ...(process.env.DEPLOY_TARGET !== 'netlify' && {
+      trailingSlash: true,
+      skipTrailingSlashRedirect: true,
+    }),
   }),
 }
 

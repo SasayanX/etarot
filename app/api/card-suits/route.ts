@@ -78,6 +78,8 @@ const cardSuits = [
   },
 ]
 
+export const dynamic = 'force-static'
+
 export async function GET() {
   // 画像URLが存在するか確認するためのヘルパー関数
   const checkImageExists = async (url: string): Promise<boolean> => {
