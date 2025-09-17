@@ -1,0 +1,10 @@
+{
+  "name": "etarot-wrapper",
+  "scripts": {
+    "wrapper:build": "mkdir -p wrapper && cp wrapper/index.html wrapper/",
+    "wrapper:add": "npx cap add android --config capacitor-wrapper.config.ts",
+    "wrapper:sync": "npx cap sync --config capacitor-wrapper.config.ts",
+    "wrapper:open": "npx cap open android --config capacitor-wrapper.config.ts",
+    "apk:wrapper": "npm run wrapper:build && npm run wrapper:sync && cd android && ./gradlew assembleRelease"
+  }
+}

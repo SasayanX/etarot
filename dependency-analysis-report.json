@@ -1,0 +1,144 @@
+{
+  "@capacitor/cli": {
+    "used": true,
+    "usageCount": 3,
+    "files": [
+      {
+        "file": "D:\\project\\e-tarot\\capacitor-enhanced.config.ts",
+        "used": true,
+        "importMatches": [
+          "import type { CapacitorConfig } from \"@capacitor/cli\""
+        ],
+        "requireMatches": []
+      },
+      {
+        "file": "D:\\project\\e-tarot\\capacitor-wrapper.config.ts",
+        "used": true,
+        "importMatches": [
+          "import type { CapacitorConfig } from \"@capacitor/cli\""
+        ],
+        "requireMatches": []
+      },
+      {
+        "file": "D:\\project\\e-tarot\\capacitor.config.ts",
+        "used": true,
+        "importMatches": [
+          "import type { CapacitorConfig } from \"@capacitor/cli\""
+        ],
+        "requireMatches": []
+      }
+    ]
+  },
+  "@emotion/is-prop-valid": {
+    "used": false,
+    "usageCount": 0,
+    "files": []
+  },
+  "canvas-confetti": {
+    "used": true,
+    "usageCount": 2,
+    "files": [
+      {
+        "file": "D:\\project\\e-tarot\\components\\confetti-celebration.tsx",
+        "used": true,
+        "importMatches": [
+          "import confetti from \"canvas-confetti\""
+        ],
+        "requireMatches": []
+      },
+      {
+        "file": "D:\\project\\e-tarot\\components\\login-bonus-modal.tsx",
+        "used": true,
+        "importMatches": [
+          "import confetti from \"canvas-confetti\""
+        ],
+        "requireMatches": []
+      }
+    ]
+  },
+  "date-fns": {
+    "used": false,
+    "usageCount": 0,
+    "files": []
+  },
+  "embla-carousel-react": {
+    "used": false,
+    "usageCount": 0,
+    "files": []
+  },
+  "geist": {
+    "used": false,
+    "usageCount": 0,
+    "files": []
+  },
+  "input-otp": {
+    "used": true,
+    "usageCount": 1,
+    "files": [
+      {
+        "file": "D:\\project\\e-tarot\\components\\ui\\input-otp.tsx",
+        "used": true,
+        "importMatches": [
+          "import { OTPInput, OTPInputContext } from 'input-otp'"
+        ],
+        "requireMatches": []
+      }
+    ]
+  },
+  "react-day-picker": {
+    "used": true,
+    "usageCount": 1,
+    "files": [
+      {
+        "file": "D:\\project\\e-tarot\\components\\ui\\calendar.tsx",
+        "used": true,
+        "importMatches": [
+          "import { DayButton, DayPicker, getDefaultClassNames } from 'react-day-picker'"
+        ],
+        "requireMatches": []
+      }
+    ]
+  },
+  "react-resizable-panels": {
+    "used": true,
+    "usageCount": 1,
+    "files": [
+      {
+        "file": "D:\\project\\e-tarot\\components\\ui\\resizable.tsx",
+        "used": true,
+        "importMatches": [
+          "import * as ResizablePrimitive from 'react-resizable-panels'"
+        ],
+        "requireMatches": []
+      }
+    ]
+  },
+  "recharts": {
+    "used": true,
+    "usageCount": 1,
+    "files": [
+      {
+        "file": "D:\\project\\e-tarot\\components\\ui\\chart.tsx",
+        "used": true,
+        "importMatches": [
+          "import * as RechartsPrimitive from 'recharts'"
+        ],
+        "requireMatches": []
+      }
+    ]
+  },
+  "vaul": {
+    "used": true,
+    "usageCount": 1,
+    "files": [
+      {
+        "file": "D:\\project\\e-tarot\\components\\ui\\drawer.tsx",
+        "used": true,
+        "importMatches": [
+          "import { Drawer as DrawerPrimitive } from 'vaul'"
+        ],
+        "requireMatches": []
+      }
+    ]
+  }
+}

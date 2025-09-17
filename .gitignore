@@ -1,0 +1,80 @@
+# Dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# Testing
+/coverage
+
+# Next.js
+/.next/
+/out/
+
+# Production
+/build
+/dist
+
+# Misc
+.DS_Store
+*.pem
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Local env files
+.env*.local
+.env.development
+.env.production
+
+# Vercel
+.vercel
+
+# Netlify
+.netlify
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+Thumbs.db
+
+# Logs
+logs
+*.log
+
+# Cache
+.cache/
+.parcel-cache/
+
+# Temporary folders
+tmp/
+temp/
+
+# Performance monitoring
+.performance/
+
+# Bundle analysis
+.analyze/
+
+# Capacitor
+/android/
+/ios/
+/dist/
+capacitor.config.ts
+
+# PWA
+/public/sw.js
+/public/workbox-*.js
+
+# Optimization artifacts
+/optimization-reports/
+/.optimization-cache/

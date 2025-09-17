@@ -1,0 +1,230 @@
+.shuffle-card {
+  position: absolute;
+  backface-visibility: hidden;
+  will-change: transform;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.shuffle-card:nth-child(3n) {
+  animation: shuffleAnimation1 0.8s infinite alternate ease-in-out;
+  animation-delay: calc(var(--delay) * 0.5s);
+}
+
+.shuffle-card:nth-child(3n + 1) {
+  animation: shuffleAnimation2 0.7s infinite alternate-reverse ease-in-out;
+  animation-delay: calc(var(--delay) * 0.5s);
+}
+
+.shuffle-card:nth-child(3n + 2) {
+  animation: shuffleAnimation3 0.9s infinite alternate ease-in-out;
+  animation-delay: calc(var(--delay) * 0.5s);
+}
+
+@keyframes shuffleAnimation1 {
+  0% {
+    transform: rotate(calc(var(--rotation) - 30deg))
+      translate(calc(var(--offsetX) * 0.7px), calc(var(--offsetY) * 0.7px)) scale(var(--scale));
+  }
+  50% {
+    transform: rotate(calc(var(--rotation) + 10deg))
+      translate(calc(var(--offsetX) * -0.3px), calc(var(--offsetY) * 1.2px)) scale(calc(var(--scale) * 1.05));
+  }
+  100% {
+    transform: rotate(calc(var(--rotation) + 40deg))
+      translate(calc(var(--offsetX) * 1.2px), calc(var(--offsetY) * -0.5px)) scale(var(--scale));
+  }
+}
+
+@keyframes shuffleAnimation2 {
+  0% {
+    transform: rotate(calc(var(--rotation) + 20deg))
+      translate(calc(var(--offsetX) * -0.8px), calc(var(--offsetY) * 0.5px)) scale(var(--scale));
+  }
+  60% {
+    transform: rotate(calc(var(--rotation) - 15deg))
+      translate(calc(var(--offsetX) * 0.4px), calc(var(--offsetY) * -1.1px)) scale(calc(var(--scale) * 0.95));
+  }
+  100% {
+    transform: rotate(calc(var(--rotation) - 35deg))
+      translate(calc(var(--offsetX) * 1.1px), calc(var(--offsetY) * 0.8px)) scale(var(--scale));
+  }
+}
+
+@keyframes shuffleAnimation3 {
+  0% {
+    transform: rotate(calc(var(--rotation) - 10deg))
+      translate(calc(var(--offsetX) * 0.9px), calc(var(--offsetY) * -0.6px)) scale(var(--scale));
+  }
+  40% {
+    transform: rotate(calc(var(--rotation) + 25deg))
+      translate(calc(var(--offsetX) * -0.5px), calc(var(--offsetY) * 0.7px)) scale(calc(var(--scale) * 1.1));
+  }
+  100% {
+    transform: rotate(calc(var(--rotation) + 5deg))
+      translate(calc(var(--offsetX) * 0.6px), calc(var(--offsetY) * 1.3px)) scale(var(--scale));
+  }
+}
+
+.shuffle-container {
+  perspective: 1000px;
+  overflow: visible;
+}
+
+.fortune-page {
+  min-height: 100vh;
+  padding: 2rem;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+}
+
+.fortune-menu {
+  text-align: center;
+  color: white;
+}
+
+.fortune-menu h2 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #fbbf24;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: #fbbf24;
+  box-shadow: 0 10px 25px rgba(251, 191, 36, 0.3);
+}
+
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.card p {
+  color: white;
+  font-weight: 600;
+  margin: 0;
+}
+
+.fortune-card-screen,
+.fortune-reading-screen {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  color: white;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 2rem;
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+}
+
+.fortune-card-screen h2,
+.fortune-reading-screen h2 {
+  color: #fbbf24;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.fortune-card-screen img {
+  max-width: 300px;
+  height: auto;
+  border-radius: 12px;
+  margin: 1rem 0;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.reading-type-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.reading-type-buttons button {
+  background: #7c3aed;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.reading-type-buttons button:hover {
+  background: #6d28d9;
+  transform: translateY(-2px);
+}
+
+.fortune-reading-screen p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+button {
+  background: #fbbf24;
+  color: #1a1a2e;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  margin: 0.5rem;
+}
+
+button:hover {
+  background: #f59e0b;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(251, 191, 36, 0.4);
+}
+
+@media (max-width: 768px) {
+  .fortune-page {
+    padding: 1rem;
+  }
+
+  .fortune-menu h2 {
+    font-size: 2rem;
+  }
+
+  .card-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+
+  .fortune-card-screen,
+  .fortune-reading-screen {
+    padding: 1.5rem;
+  }
+
+  .reading-type-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .reading-type-buttons button {
+    width: 200px;
+  }
+}

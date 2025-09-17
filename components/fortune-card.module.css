@@ -1,0 +1,557 @@
+.fortuneCardContainer {
+  position: relative;
+  width: 150px;
+  height: 260px;
+  margin: 0 auto 30px; /* 下部のマージンを追加 */
+  perspective: 1000px;
+}
+
+.horizontal {
+  transform: rotate(90deg);
+}
+
+.fortuneCard {
+  width: 140px;
+  height: 200px;
+  perspective: 1000px;
+  cursor: pointer;
+  margin: 0 auto;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.cardInner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+  cursor: pointer;
+}
+
+.flipped {
+  transform: rotateY(180deg);
+}
+
+.cardFace {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.cardFront,
+.cardBack {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.cardFront {
+  transform: rotateY(180deg);
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+/* カードの表面（めくった後に表示される面） */
+/* .cardFront {
+  background-color: #fff;
+  transform: rotateY(180deg); /* 表面は最初は裏側に */
+/*  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  padding: 5px; /* 画像の周りに少しスペースを追加 */
+/* } */
+
+.cardBack {
+  background-color: #6b46c1;
+  transform: rotateY(0deg);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cardImage {
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.cardBackImageContainer,
+.cardImageContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.cardBackImage,
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  border-radius: 8px;
+}
+
+.defaultCardBack {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    45deg,
+    #1a1a1a 25%,
+    #2a2a2a 25%,
+    #2a2a2a 50%,
+    #1a1a1a 50%,
+    #1a1a1a 75%,
+    #2a2a2a 75%,
+    #2a2a2a
+  );
+  background-size: 20px 20px;
+}
+
+.positionLabel {
+  position: absolute;
+  bottom: -25px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 0.8rem;
+  color: #666;
+  white-space: nowrap;
+}
+
+.reversed {
+  transform: rotateY(180deg) rotate(180deg);
+}
+
+/* Celtic Cross specific styles */
+.crossSection {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  margin: 0 auto 120px; /* 下部のマージンを増やす */
+}
+
+.centerCards {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.overlayCard {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+.leftCard {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.topCard {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.rightCard {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+}
+
+.bottomCard {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.staffSection {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 40px; /* マージンを増やす */
+  margin-bottom: 30px; /* 下部のマージンを追加 */
+}
+
+/* Three Card Spread */
+.threeCardSpread {
+  margin: 20px 15px 40px;
+  width: 120px;
+  height: 210px;
+  display: flex;
+  justify-content: space-around;
+}
+
+/* Single Card Spread */
+.singleCard {
+  margin: 20px auto 40px;
+  width: 180px;
+  height: 320px;
+}
+
+/* Reading Container */
+.readingContainer {
+  margin: 20px 0;
+  min-height: 350px; /* 高さを増やす */
+}
+
+/* ケルト十字スプレッド */
+.celticCross {
+  position: absolute;
+  width: 100px;
+  height: 175px;
+  margin: 0;
+}
+
+/* ケルト十字の各ポジション */
+.presentPosition {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+.challengePosition {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(90deg);
+  z-index: 9;
+}
+
+.pastPosition {
+  top: 50%;
+  left: calc(50% - 120px);
+  transform: translate(-50%, -50%);
+  z-index: 8;
+}
+
+.futurePosition {
+  top: 50%;
+  left: calc(50% + 120px);
+  transform: translate(-50%, -50%);
+  z-index: 8;
+}
+
+.abovePosition {
+  top: calc(50% - 120px);
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 8;
+}
+
+.belowPosition {
+  top: calc(50% + 120px);
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 8;
+}
+
+.advicePosition {
+  top: calc(50% - 60px);
+  left: calc(50% + 200px);
+  transform: translate(-50%, -50%);
+  z-index: 7;
+}
+
+.externalPosition {
+  top: calc(50% + 20px);
+  left: calc(50% + 200px);
+  transform: translate(-50%, -50%);
+  z-index: 6;
+}
+
+.hopesPosition {
+  top: calc(50% + 100px);
+  left: calc(50% + 200px);
+  transform: translate(-50%, -50%);
+  z-index: 5;
+}
+
+.outcomePosition {
+  top: calc(50% + 180px);
+  left: calc(50% + 200px);
+  transform: translate(-50%, -50%);
+  z-index: 4;
+}
+
+/* カードコンテナのスタイル修正 - 縦横比を調整 */
+.cardContainer {
+  perspective: 1000px;
+  width: 140px; /* 幅を調整 */
+  height: 200px; /* 高さを調整 - 縦横比を約3:2に */
+  margin: 0 auto;
+  cursor: pointer;
+  position: relative;
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.card.flipped {
+  transform: rotateY(180deg);
+}
+
+.cardFace {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* カードの裏面（めくる前に表示される面） */
+/* .cardBack {
+  background-color: #2a0944;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  transform: rotateY(0deg); /* 裏面は最初に表示 */
+/* } */
+
+/* カードの表面（めくった後に表示される面） */
+/* .cardFront {
+  background-color: #fff;
+  transform: rotateY(180deg); /* 表面は最初は裏側に */
+/*  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+} */
+
+.cardFront.reversed {
+  transform: rotateY(180deg) rotate(180deg);
+}
+
+/* カードの光沢効果 */
+.cardFace::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0) 60%);
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* カードホバー効果 */
+.cardContainer:hover .card:not(.flipped) {
+  transform: translateY(-10px) rotateX(5deg);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+  .fortuneCardContainer {
+    width: 100px;
+    height: 175px;
+    margin-bottom: 35px; /* モバイルでの下部マージンを増やす */
+  }
+
+  .crossSection {
+    width: 250px;
+    height: 250px;
+    margin-bottom: 150px; /* モバイルでの下部マージンをさらに増やす */
+  }
+
+  .staffSection {
+    flex-wrap: wrap;
+    margin-top: 50px; /* モバイルでのマージンを増やす */
+    margin-bottom: 40px; /* モバイルでの下部マージンを増やす */
+  }
+
+  .staffSection .fortuneCardContainer {
+    margin: 10px;
+  }
+
+  .readingContainer {
+    min-height: 400px; /* モバイルでの高さをさらに増やす */
+  }
+
+  .fortuneCard {
+    width: 120px;
+    height: 210px;
+    margin: 8px;
+  }
+
+  .singleCard {
+    width: 150px;
+    height: 260px;
+    margin: 15px auto 35px;
+  }
+
+  .threeCardSpread {
+    width: 100px;
+    height: 175px;
+    margin: 15px 8px 35px;
+  }
+
+  .celticCross {
+    width: 80px;
+    height: 140px;
+  }
+
+  .pastPosition {
+    left: calc(50% - 90px);
+  }
+
+  .futurePosition {
+    left: calc(50% + 90px);
+  }
+
+  .abovePosition {
+    top: calc(50% - 90px);
+  }
+
+  .belowPosition {
+    top: calc(50% + 90px);
+  }
+
+  .advicePosition {
+    top: calc(50% - 50px);
+    left: calc(50% + 160px);
+  }
+
+  .externalPosition {
+    top: calc(50% + 15px);
+    left: calc(50% + 160px);
+  }
+
+  .hopesPosition {
+    top: calc(50% + 80px);
+    left: calc(50% + 160px);
+  }
+
+  .outcomePosition {
+    top: calc(50% + 145px);
+    left: calc(50% + 160px);
+  }
+
+  .positionLabel {
+    bottom: -20px;
+    font-size: 0.7rem;
+  }
+
+  /* モバイル用のカードサイズ調整 */
+  .cardContainer {
+    width: 100px; /* モバイル用の幅 */
+    height: 150px; /* モバイル用の高さ - 縦横比を維持 */
+  }
+}
+
+/* 小さい画面用の調整 */
+@media (max-width: 480px) {
+  .celticCross {
+    width: 70px;
+    height: 120px;
+  }
+
+  .pastPosition {
+    left: calc(50% - 80px);
+  }
+
+  .futurePosition {
+    left: calc(50% + 80px);
+  }
+
+  .abovePosition {
+    top: calc(50% - 80px);
+  }
+
+  .belowPosition {
+    top: calc(50% + 80px);
+  }
+
+  .advicePosition {
+    top: calc(50% - 45px);
+    left: calc(50% + 140px);
+  }
+
+  .externalPosition {
+    top: calc(50% + 10px);
+    left: calc(50% + 140px);
+  }
+
+  .hopesPosition {
+    top: calc(50% + 65px);
+    left: calc(50% + 140px);
+  }
+
+  .outcomePosition {
+    top: calc(50% + 120px);
+    left: calc(50% + 140px);
+  }
+
+  /* 小さい画面用のカードサイズ調整 */
+  .cardContainer {
+    width: 90px; /* 小さい画面用の幅 */
+    height: 135px; /* 小さい画面用の高さ - 縦横比を維持 */
+  }
+}
+
+.cardFront img,
+.cardBack img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  border-radius: 8px;
+  display: block;
+}
+
+.cardImage,
+.cardBackImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  transition: opacity 0.3s ease;
+}
+
+.cardImage:not(.loaded) {
+  opacity: 0;
+}
+
+.cardImage.loaded {
+  opacity: 1;
+}
+
+/* アニメーション用のスタイル */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.cardImage {
+  animation: fadeIn 0.5s ease-in-out;
+}

@@ -1,0 +1,110 @@
+.fortuneReading {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.cardPosition {
+  margin: 10px;
+  transition: transform 0.3s ease;
+}
+
+.cardPosition:hover {
+  transform: translateY(-5px);
+}
+
+/* 3枚スプレッド */
+.threeCardSpread {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.threeCardSpread .cardPosition {
+  flex: 0 0 auto;
+}
+
+/* ケルト十字スプレッド */
+.celticCrossSpread {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, auto);
+  gap: 10px;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.celticCrossSpread .cardPosition:nth-child(1) {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.celticCrossSpread .cardPosition:nth-child(2) {
+  grid-column: 2;
+  grid-row: 2;
+  transform: rotate(90deg);
+}
+
+.celticCrossSpread .cardPosition:nth-child(3) {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.celticCrossSpread .cardPosition:nth-child(4) {
+  grid-column: 2;
+  grid-row: 3;
+}
+
+.celticCrossSpread .cardPosition:nth-child(5) {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.celticCrossSpread .cardPosition:nth-child(6) {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+.celticCrossSpread .cardPosition:nth-child(7) {
+  grid-column: 4;
+  grid-row: 4;
+}
+
+.celticCrossSpread .cardPosition:nth-child(8) {
+  grid-column: 4;
+  grid-row: 3;
+}
+
+.celticCrossSpread .cardPosition:nth-child(9) {
+  grid-column: 4;
+  grid-row: 2;
+}
+
+.celticCrossSpread .cardPosition:nth-child(10) {
+  grid-column: 4;
+  grid-row: 1;
+}
+
+/* デフォルトスプレッド */
+.defaultSpread {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  font-size: 1.5rem;
+  color: #666;
+}
