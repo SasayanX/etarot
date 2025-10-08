@@ -10,7 +10,7 @@
     "type-check": "tsc --noEmit",
     "start": "next start",
     "analyze": "ANALYZE=true next build",
-    "clean": "rm -rf .next out dist",
+    "clean": "rimraf .next out dist",
     "prebuild": "npm run type-check && npm run lint",
     "build:prod": "cross-env NODE_ENV=production next build",
     "build:static": "cross-env NODE_ENV=production next build",
@@ -84,6 +84,7 @@
     "@types/react-dom": "^19",
     "cross-env": "^10.0.0",
     "postcss": "^8.5",
+    "rimraf": "^6.0.1",
     "tailwindcss": "^3.4.17",
     "typescript": "^5"
   }
