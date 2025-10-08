@@ -23,7 +23,14 @@
     "deploy:lolipop": "npm run build:lolipop",
     "test:performance": "npm run build:prod && npm run start:prod",
     "optimize": "npm run clean && npm run build:prod",
-    "preview": "npm run build:prod && npm run start:prod"
+    "preview": "npm run build:prod && npm run start:prod",
+    "cap:sync": "npx cap sync android",
+    "cap:open": "npx cap open android",
+    "cap:run": "npx cap run android",
+    "apk:debug": "cd android && gradlew assembleDebug",
+    "apk:release": "cd android && gradlew assembleRelease",
+    "apk:install": "adb install android/app/build/outputs/apk/debug/app-debug.apk",
+    "apk:build": "npm run build:lolipop && npm run cap:sync && npm run apk:debug"
   },
   "dependencies": {
     "@capacitor/cli": "latest",
