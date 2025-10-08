@@ -14,7 +14,7 @@ export const DEPLOY_CONFIG = {
     legacy: 'https://tarot.kanau-kiryu.com',
     
     // 新バージョンアプリ用（Netlify）
-    current: 'https://e-tarot-app.netlify.app', // 仮のNetlify URL
+    current: 'https://etarot.netlify.app', // Netlify デプロイURL
     
     // カスタムドメイン設定後
     customDomain: 'https://tarot-v2.kanau-kiryu.com', // オプションB の場合
