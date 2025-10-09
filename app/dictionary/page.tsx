@@ -380,7 +380,7 @@ const generateMinorArcana = (t: (key: string) => string) => {
 }
 
 // カードアイテムコンポーネント
-function CardItem({ card, onClick }: { card: any; onClick: () => void }) {
+function CardItem({ card, onClick }: { card: any; onClick: (card: any) => void }) {
   const [_imageError, setImageError] = useState(false)
   const [fallbackAttempted, setFallbackAttempted] = useState(false)
   const [imageSrc, setImageSrc] = useState(card.image)
@@ -409,7 +409,7 @@ function CardItem({ card, onClick }: { card: any; onClick: () => void }) {
   return (
     <div
       className="bg-gray-900 border border-purple-700 rounded-lg cursor-pointer hover:shadow-xl transition-shadow duration-300 hover:border-amber-400 overflow-hidden"
-      onClick={onClick}
+      onClick={() => onClick(card)}
     >
       <div className="p-2 flex flex-col items-center justify-center">
         <div className="relative w-full aspect-[2/3] overflow-hidden rounded-md border border-purple-600">
@@ -498,10 +498,10 @@ export default function DictionaryPage() {
       <p className="text-center text-gray-300 mb-6">{t("dictionary.subtitle")}</p>
 
       {/* オリジナルのタブデザイン */}
-      <div className="flex mb-6 border-b border-amber-500/30">
+      <div className="flex mb-6 border-b border-amber-500/50 bg-gray-800/50 rounded-t-lg">
         <button
-          className={`px-4 py-2 text-lg font-medium ${
-            activeTab === "major" ? "text-amber-400 border-b-2 border-amber-400" : "text-gray-400"
+          className={`px-4 py-2 text-lg font-medium transition-colors ${
+            activeTab === "major" ? "text-amber-400 border-b-2 border-amber-400 bg-purple-900/50" : "text-purple-200 hover:text-amber-300 hover:bg-gray-800/70"
           }`}
           onClick={() => {
             showAd("dictionary_major")
@@ -511,8 +511,8 @@ export default function DictionaryPage() {
           {t("dictionary.tab.major")}
         </button>
         <button
-          className={`px-4 py-2 text-lg font-medium ${
-            activeTab === "minor" ? "text-amber-400 border-b-2 border-amber-400" : "text-gray-400"
+          className={`px-4 py-2 text-lg font-medium transition-colors ${
+            activeTab === "minor" ? "text-amber-400 border-b-2 border-amber-400 bg-purple-900/50" : "text-purple-200 hover:text-amber-300 hover:bg-gray-800/70"
           }`}
           onClick={() => {
             showAd("dictionary_minor")
@@ -522,8 +522,8 @@ export default function DictionaryPage() {
           {t("dictionary.tab.minor")}
         </button>
         <button
-          className={`px-4 py-2 text-lg font-medium ${
-            activeTab === "wands" ? "text-amber-400 border-b-2 border-amber-400" : "text-gray-400"
+          className={`px-4 py-2 text-lg font-medium transition-colors ${
+            activeTab === "wands" ? "text-amber-400 border-b-2 border-amber-400 bg-purple-900/50" : "text-purple-200 hover:text-amber-300 hover:bg-gray-800/70"
           }`}
           onClick={() => {
             showAd("dictionary_wands")
@@ -533,8 +533,8 @@ export default function DictionaryPage() {
           {t("dictionary.tab.wands")}
         </button>
         <button
-          className={`px-4 py-2 text-lg font-medium ${
-            activeTab === "cups" ? "text-amber-400 border-b-2 border-amber-400" : "text-gray-400"
+          className={`px-4 py-2 text-lg font-medium transition-colors ${
+            activeTab === "cups" ? "text-amber-400 border-b-2 border-amber-400 bg-purple-900/50" : "text-purple-200 hover:text-amber-300 hover:bg-gray-800/70"
           }`}
           onClick={() => {
             showAd("dictionary_cups")
@@ -544,8 +544,8 @@ export default function DictionaryPage() {
           {t("dictionary.tab.cups")}
         </button>
         <button
-          className={`px-4 py-2 text-lg font-medium ${
-            activeTab === "swords" ? "text-amber-400 border-b-2 border-amber-400" : "text-gray-400"
+          className={`px-4 py-2 text-lg font-medium transition-colors ${
+            activeTab === "swords" ? "text-amber-400 border-b-2 border-amber-400 bg-purple-900/50" : "text-purple-200 hover:text-amber-300 hover:bg-gray-800/70"
           }`}
           onClick={() => {
             showAd("dictionary_swords")
@@ -555,8 +555,8 @@ export default function DictionaryPage() {
           {t("dictionary.tab.swords")}
         </button>
         <button
-          className={`px-4 py-2 text-lg font-medium ${
-            activeTab === "pentacles" ? "text-amber-400 border-b-2 border-amber-400" : "text-gray-400"
+          className={`px-4 py-2 text-lg font-medium transition-colors ${
+            activeTab === "pentacles" ? "text-amber-400 border-b-2 border-amber-400 bg-purple-900/50" : "text-purple-200 hover:text-amber-300 hover:bg-gray-800/70"
           }`}
           onClick={() => {
             showAd("dictionary_pentacles")

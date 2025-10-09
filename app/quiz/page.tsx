@@ -1036,7 +1036,16 @@ const QuizPage = () => {
                 )}
               >
                 <div className="flex justify-between items-start mb-2">
-                  <h3 className="text-lg font-bold text-white">{language === "ja" ? "正解！" : "Correct!"}</h3>
+                  <h3 className={cn(
+                    "text-lg font-bold",
+                    selectedOption === questions[currentQuestionIndex].correctAnswer
+                      ? "text-green-400"
+                      : "text-red-400"
+                  )}>
+                    {selectedOption === questions[currentQuestionIndex].correctAnswer
+                      ? (language === "ja" ? "正解！" : "Correct!")
+                      : (language === "ja" ? "不正解" : "Incorrect")}
+                  </h3>
                   <Button
                     variant="ghost"
                     size="sm"

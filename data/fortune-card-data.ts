@@ -431,7 +431,7 @@ export function getLuckyItems(cardId: number, language: string): string[] {
       ja: [
         "地球儀",
         "完成の証",
-        "統合の石",
+        "ラピスラズリ",
         "成功のトロフィー",
         "調和の音楽",
         "ダイヤモンド",
@@ -441,7 +441,7 @@ export function getLuckyItems(cardId: number, language: string): string[] {
       en: [
         "Globe",
         "Certificate of completion",
-        "Stone of integration",
+        "Lapis Lazuli",
         "Trophy of success",
         "Music of harmony",
         "Diamond",
