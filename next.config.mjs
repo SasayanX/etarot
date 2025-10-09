@@ -7,6 +7,8 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  // Capacitor用の設定
+  trailingSlash: false, // Capacitorではfalseが推奨
   images: {
     unoptimized: true, // Capacitor用の設定
     domains: ['vercel.com', 'blob.vercel-storage.com'],
@@ -63,16 +65,11 @@ const nextConfig = {
   },
   // 本番環境での最適化
   ...(process.env.NODE_ENV === 'production' && {
-    output: process.env.BUILD_STANDALONE ? 'standalone' : (process.env.DEPLOY_TARGET === 'netlify' ? undefined : 'export'),
+    output: 'export', // 常に静的エクスポート（Capacitor用）
     generateEtags: false,
     httpAgentOptions: {
       keepAlive: true,
     },
-    // 静的エクスポート用の設定（ロリポップ用）
-    ...(process.env.DEPLOY_TARGET !== 'netlify' && {
-      trailingSlash: true,
-      skipTrailingSlashRedirect: true,
-    }),
   }),
 }
 

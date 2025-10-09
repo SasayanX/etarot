@@ -16,8 +16,10 @@ export function middleware(request: NextRequest) {
 
   // WebView検証 (WebView verification)
   const isWebView =
+    userAgent.includes("etarotapp") ||
     userAgent.includes("tarotapp") ||
     userAgent.includes("wv") ||
+    userAgent.includes("mobile") || // Capacitorのモバイル判定
     /iphone|ipod|ipad.*applewebkit(?!.*safari)/i.test(userAgent)
 
   // 開発環境ではボットチェックをスキップ

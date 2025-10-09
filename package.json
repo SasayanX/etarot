@@ -33,7 +33,9 @@
     "apk:build": "npm run build:lolipop && npm run cap:sync && npm run apk:debug"
   },
   "dependencies": {
+    "@capacitor/android": "^7.4.3",
     "@capacitor/cli": "latest",
+    "@capacitor/core": "^7.4.3",
     "@hookform/resolvers": "^3.9.1",
     "@radix-ui/react-accordion": "1.2.2",
     "@radix-ui/react-alert-dialog": "1.1.4",
