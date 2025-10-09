@@ -145,36 +145,36 @@
             
             try {
                 // メインドメイン確認
-                const mainResponse = await fetch('https://tarot.kanau-kiryu.com/app-ads.txt');
-                const mainContent = await mainResponse.text();
+                const netlifyResponse = await fetch('https://etarot.netlify.app/app-ads.txt');
+                const netlifyContent = await netlifyResponse.text();
                 
-                // Vercelドメイン確認
-                const vercelResponse = await fetch('https://etarot6.vercel.app/app-ads.txt');
-                const vercelContent = await vercelResponse.text();
+                // レガシードメイン確認（フォールバック用）
+                const legacyResponse = await fetch('https://tarot.kanau-kiryu.com/app-ads.txt');
+                const legacyContent = await legacyResponse.text();
                 
                 const expectedContent = 'google.com, pub-3409171148853394, DIRECT, f08c47fec0942fa0';
                 
                 let html = '<h3>app-ads.txt確認結果</h3>';
                 
-                if (mainContent.trim() === expectedContent) {
-                    html += '<div class="status success">✅ メインドメイン: 正常</div>';
-                    log('メインドメインのapp-ads.txt正常', 'success');
+                if (netlifyContent.trim() === expectedContent) {
+                    html += '<div class="status success">✅ Netlifyドメイン: 正常</div>';
+                    log('Netlifyドメインのapp-ads.txt正常', 'success');
                 } else {
-                    html += '<div class="status error">❌ メインドメイン: 異常</div>';
-                    log('メインドメインのapp-ads.txt異常', 'error');
+                    html += '<div class="status error">❌ Netlifyドメイン: 異常</div>';
+                    log('Netlifyドメインのapp-ads.txt異常', 'error');
                 }
                 
-                if (vercelContent.trim() === expectedContent) {
-                    html += '<div class="status success">✅ Vercelドメイン: 正常</div>';
-                    log('Vercelドメインのapp-ads.txt正常', 'success');
+                if (legacyContent.trim() === expectedContent) {
+                    html += '<div class="status success">✅ レガシードメイン: 正常</div>';
+                    log('レガシードメインのapp-ads.txt正常', 'success');
                 } else {
-                    html += '<div class="status error">❌ Vercelドメイン: 異常</div>';
-                    log('Vercelドメインのapp-ads.txt異常', 'error');
+                    html += '<div class="status error">❌ レガシードメイン: 異常</div>';
+                    log('レガシードメインのapp-ads.txt異常', 'error');
                 }
                 
                 html += `<div class="code-block">期待値: ${expectedContent}</div>`;
-                html += `<div class="code-block">メイン実際値: ${mainContent}</div>`;
-                html += `<div class="code-block">Vercel実際値: ${vercelContent}</div>`;
+                html += `<div class="code-block">Netlify実際値: ${netlifyContent}</div>`;
+                html += `<div class="code-block">レガシー実際値: ${legacyContent}</div>`;
                 
                 results.innerHTML = html;
                 

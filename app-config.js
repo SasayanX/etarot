@@ -10,14 +10,14 @@ export const APP_VERSION = '2.0.0' // 新バージョン
 export const DEPLOY_CONFIG = {
   // 本番環境URL
   production: {
-    // 既存アプリ用（ロリポップ）
+    // 既存アプリ用（ロリポップ - フォールバック用のみ）
     legacy: 'https://tarot.kanau-kiryu.com',
     
-    // 新バージョンアプリ用（Netlify）
-    current: 'https://etarot.netlify.app', // Netlify デプロイURL
+    // 新バージョンアプリ用（Netlify - メイン）
+    current: 'https://etarot.netlify.app', // Netlify デプロイURL（メイン）
     
-    // カスタムドメイン設定後
-    customDomain: 'https://tarot-v2.kanau-kiryu.com', // オプションB の場合
+    // カスタムドメイン設定後（将来的に）
+    customDomain: 'https://tarot.kanau-kiryu.com', // 将来的にNetlifyに統合
   },
   
   // 開発環境
