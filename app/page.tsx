@@ -7,16 +7,29 @@ import { ArrowRight } from "lucide-react"
 import { useState, useCallback } from "react"
 import { LoginBonusModal } from "@/components/login-bonus-modal"
 import { useLoginBonus } from "@/hooks/use-login-bonus"
+import { ReviewPromptDialog } from "@/components/review-prompt-dialog"
+import { useReviewPrompt } from "@/hooks/use-review-prompt"
 import { useLanguage } from "@/contexts/language-context"
 
 export default function Home() {
   const { showLoginBonus, claimLoginBonus } = useLoginBonus()
+  const { showReviewPrompt, dismissReviewPrompt, markReviewShown } = useReviewPrompt()
   const { t } = useLanguage()
 
   return (
     <div className="py-8 space-y-8">
       {/* ログインボーナスモーダル - エラーハンドリング追加 */}
       {showLoginBonus && <LoginBonusModal isOpen={showLoginBonus} onClose={claimLoginBonus} />}
+      
+      {/* レビュー依頼ダイアログ */}
+      {showReviewPrompt && (
+        <ReviewPromptDialog
+          isOpen={showReviewPrompt}
+          onReview={markReviewShown}
+          onDismiss={dismissReviewPrompt}
+          onAlreadyReviewed={markReviewShown}
+        />
+      )}
 
       <div className="text-center space-y-2">
         <h1 className="text-4xl font-bold text-amber-400">{t("home.title")}</h1>
