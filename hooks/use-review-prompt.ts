@@ -39,16 +39,24 @@ export function useReviewPrompt() {
         // 2. まだ一度も表示していない、または前回表示から7日以上経過
         // 3. 今日まだ表示していない
         if (newUsageCount >= 5) {
-          const shouldShow = !hasShownReview || (
-            lastReviewPromptDate && 
-            isMoreThanDaysAgo(lastReviewPromptDate, 7) &&
-            lastReviewPromptDate !== today
-          )
-
-          if (shouldShow && lastReviewPromptDate !== today) {
-            console.log("Review prompt should be shown!")
+          console.log("✅ 使用回数が5回以上")
+          
+          // 初回の場合（まだ一度も表示していない）
+          if (!hasShownReview && !lastReviewPromptDate) {
+            console.log("✅ 初回表示条件を満たしています")
             setShowReviewPrompt(true)
           }
+          // 再表示の場合（7日以上経過 && 今日はまだ表示していない）
+          else if (!hasShownReview && lastReviewPromptDate) {
+            const canShowAgain = isMoreThanDaysAgo(lastReviewPromptDate, 7) && lastReviewPromptDate !== today
+            console.log("再表示チェック:", { canShowAgain, lastReviewPromptDate, today })
+            if (canShowAgain) {
+              console.log("✅ 再表示条件を満たしています")
+              setShowReviewPrompt(true)
+            }
+          }
+        } else {
+          console.log("❌ 使用回数が5回未満:", newUsageCount)
         }
 
         setInitialized(true)
