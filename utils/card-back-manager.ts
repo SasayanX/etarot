@@ -24,6 +24,8 @@ export const CARD_BACK_MAPPING: Record<string, string> = {
   dragon: "/dragon-tarot-back.png",
   "golden-dragon": "/default-tarot-card-back.png",
   goldenDragon: "/default-tarot-card-back.png",
+  "lydia-back-30": "/Lydia_Back30.png",
+  "lydia-back-60": "/Lydia_Back60.png",
 }
 
 // ストレージキー

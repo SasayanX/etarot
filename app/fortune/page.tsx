@@ -11,6 +11,7 @@ import { useShop } from "@/contexts/shop-context"
 import { getCardImageUrl } from "./card-image-urls"
 import { useLanguage } from "@/contexts/language-context"
 import "./fortune.css"
+import { LydiaMessage } from "@/components/fortune/lydia-message"
 
 // データファイルからインポート
 import { getRandomSafeCards, getLuckyItems, getCardBackImage, getCurrentCardBackUrl } from "@/data/fortune-card-data"
@@ -635,6 +636,8 @@ export default function FortunePage() {
                 </div>
               </div>
             )}
+
+            <LydiaMessage className="mt-6" />
           </div>
 
           <div className="flex justify-center">

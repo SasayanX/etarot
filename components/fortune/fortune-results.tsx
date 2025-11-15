@@ -9,11 +9,12 @@ import { useState, useEffect } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
-import { RefreshCw, ExternalLink, AlertCircle } from "lucide-react"
+import { RefreshCw, AlertCircle } from "lucide-react"
 import FortuneCard from "@/components/fortune-card"
 import { useLanguage } from "@/contexts/language-context"
 import { useSettings } from "@/contexts/settings-context"
 import { useShop } from "@/contexts/shop-context"
+import { LydiaMessage } from "@/components/fortune/lydia-message"
 
 interface FortuneCard {
   id: number
@@ -159,6 +160,8 @@ export default function FortuneResults({
           </div>
         </CardContent>
       </Card>
+
+      <LydiaMessage />
 
       {/* 詳細モーダル */}
       <Dialog open={showReading} onOpenChange={setShowReading}>

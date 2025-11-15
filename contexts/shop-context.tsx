@@ -75,18 +75,50 @@ export const ShopProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       }
 
       // ローカルストレージの変更を監視
+      const syncOwnedSuits = (value?: string | null) => {
+        try {
+          const source = typeof value === "string" ? value : localStorage.getItem("ownedSuits")
+          if (!source) return
+          const parsed = JSON.parse(source)
+          if (Array.isArray(parsed)) {
+            setOwnedSuits(parsed)
+          }
+        } catch (error) {
+          console.error("[SHOP CONTEXT] Failed to sync owned suits:", error)
+        }
+      }
+
       const handleStorageChange = (e: StorageEvent) => {
         if (e.key === "tarotPoints" && e.newValue) {
           const newPoints = Number.parseInt(e.newValue, 10)
           console.log(`[SHOP CONTEXT] Storage change detected: ${newPoints}`)
           setPoints(newPoints)
         }
+
+        if (e.key === "ownedSuits") {
+          syncOwnedSuits(e.newValue)
+        }
+
+        if (e.key === "selectedSuit" && e.newValue) {
+          setSelectedSuit(e.newValue)
+        }
+      }
+
+      const handleOwnedSuitsChanged = (event: Event) => {
+        const detail = (event as CustomEvent).detail
+        if (detail?.ownedSuits) {
+          setOwnedSuits(detail.ownedSuits)
+        } else {
+          syncOwnedSuits()
+        }
       }
 
       window.addEventListener("storage", handleStorageChange)
+      window.addEventListener("ownedSuitsChanged", handleOwnedSuitsChanged)
 
       return () => {
         window.removeEventListener("storage", handleStorageChange)
+        window.removeEventListener("ownedSuitsChanged", handleOwnedSuitsChanged)
       }
     }
   }, [])

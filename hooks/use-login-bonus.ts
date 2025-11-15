@@ -1,6 +1,119 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { addSuitToOwned, getOwnedSuits } from "@/utils/card-back-manager"
+
+const STREAK_STORAGE_KEY = "loginStreak"
+const LAST_LOGIN_KEY = "lastLoginDate"
+const LONGEST_STREAK_KEY = "longestLoginStreak"
+const LOGIN_DAYS_KEY = "loginDays"
+
+interface StreakReward {
+  days: number
+  suitId: string
+}
+
+const STREAK_REWARDS: StreakReward[] = [
+  { days: 30, suitId: "lydia-back-30" },
+  { days: 60, suitId: "lydia-back-60" },
+]
+
+const formatDateKey = (date: Date) => {
+  const year = date.getFullYear()
+  const month = `${date.getMonth() + 1}`.padStart(2, "0")
+  const day = `${date.getDate()}`.padStart(2, "0")
+  return `${year}-${month}-${day}`
+}
+
+const parseDateKey = (dateKey: string) => {
+  const [year, month, day] = dateKey.split("-").map((value) => Number.parseInt(value, 10))
+  return new Date(year, (month || 1) - 1, day || 1)
+}
+
+const getDayDifference = (currentKey: string, previousKey: string) => {
+  const current = parseDateKey(currentKey)
+  const previous = parseDateKey(previousKey)
+  const diffMs = current.getTime() - previous.getTime()
+  return Math.round(diffMs / (1000 * 60 * 60 * 24))
+}
+
+const updateLoginStreakAndUnlocks = () => {
+  if (typeof window === "undefined") {
+    return { streak: 0, unlocked: [] as string[] }
+  }
+
+  try {
+    const todayKey = formatDateKey(new Date())
+    const lastLoginDate = localStorage.getItem(LAST_LOGIN_KEY)
+    let streak = Number.parseInt(localStorage.getItem(STREAK_STORAGE_KEY) || "0", 10) || 0
+
+    if (!lastLoginDate) {
+      streak = 1
+    } else if (lastLoginDate === todayKey) {
+      // streak already counted for today
+    } else {
+      const diffDays = getDayDifference(todayKey, lastLoginDate)
+      streak = diffDays === 1 ? streak + 1 : 1
+    }
+
+    localStorage.setItem(LAST_LOGIN_KEY, todayKey)
+    localStorage.setItem(STREAK_STORAGE_KEY, streak.toString())
+    localStorage.setItem("lastLoginBonusDate", todayKey)
+
+    const previousBest = Number.parseInt(localStorage.getItem(LONGEST_STREAK_KEY) || "0", 10) || 0
+    if (streak > previousBest) {
+      localStorage.setItem(LONGEST_STREAK_KEY, streak.toString())
+    }
+
+    // Record login days for other seasonal checks
+    try {
+      const loginDaysRaw = localStorage.getItem(LOGIN_DAYS_KEY)
+      const loginDays = loginDaysRaw ? JSON.parse(loginDaysRaw) : []
+      if (Array.isArray(loginDays) && !loginDays.includes(todayKey)) {
+        loginDays.push(todayKey)
+        localStorage.setItem(LOGIN_DAYS_KEY, JSON.stringify(loginDays))
+      } else if (!loginDaysRaw) {
+        localStorage.setItem(LOGIN_DAYS_KEY, JSON.stringify([todayKey]))
+      }
+    } catch (error) {
+      console.warn("Failed to update loginDays:", error)
+      localStorage.setItem(LOGIN_DAYS_KEY, JSON.stringify([todayKey]))
+    }
+
+    const ownedSuits = getOwnedSuits()
+    const unlocked: string[] = []
+
+    STREAK_REWARDS.forEach(({ days, suitId }) => {
+      const unlockFlagKey = `streakUnlocked:${suitId}`
+      const alreadyUnlocked = localStorage.getItem(unlockFlagKey) === "true"
+      const hasSuit = ownedSuits.includes(suitId)
+
+      if (streak >= days && (!alreadyUnlocked || !hasSuit)) {
+        const added = addSuitToOwned(suitId)
+        localStorage.setItem(unlockFlagKey, "true")
+        if (added || !hasSuit) {
+          unlocked.push(suitId)
+        }
+      }
+    })
+
+    if (unlocked.length > 0) {
+      const event = new CustomEvent("loginStreakRewardUnlocked", {
+        detail: {
+          streak,
+          unlocked,
+          timestamp: Date.now(),
+        },
+      })
+      window.dispatchEvent(event)
+    }
+
+    return { streak, unlocked }
+  } catch (error) {
+    console.error("Error updating login streak:", error)
+    return { streak: 0, unlocked: [] as string[] }
+  }
+}
 
 export function useLoginBonus() {
   const [showLoginBonus, setShowLoginBonus] = useState(false)
@@ -52,8 +165,7 @@ export function useLoginBonus() {
     if (typeof window === "undefined") return
 
     try {
-      const today = new Date().toISOString().split("T")[0]
-      localStorage.setItem("lastLoginBonusDate", today)
+      updateLoginStreakAndUnlocks()
       setShowLoginBonus(false)
     } catch (error) {
       console.error("Error claiming login bonus:", error)
