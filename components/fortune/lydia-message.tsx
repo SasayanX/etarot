@@ -1,9 +1,9 @@
 import Image from "next/image"
-import Link from "next/link"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 
 const LYDIA_IMAGE_SRC = "/lydia-reading-message.png"
+const LYDIA_URL = "https://protarot.jp/"
 
 interface LydiaMessageProps {
   className?: string
@@ -33,12 +33,17 @@ export function LydiaMessage({ className }: LydiaMessageProps) {
           <p className="text-white text-lg leading-relaxed">「もっと深く占ってみたい場合は、私がしっかりみますね。」</p>
           <div className="flex flex-col items-center md:items-start gap-1">
             <Button
-              asChild
               className="bg-amber-400/90 hover:bg-amber-300 text-black font-semibold shadow-lg"
+              onClick={() => {
+                if (typeof window !== "undefined") {
+                  const opened = window.open(LYDIA_URL, "_blank")
+                  if (!opened) {
+                    window.location.href = LYDIA_URL
+                  }
+                }
+              }}
             >
-              <Link href="https://protarot.jp/" target="_blank" rel="noopener noreferrer">
-                AI占い師リディアの本格鑑定へ
-              </Link>
+              AI占い師リディアの本格鑑定へ
             </Button>
           </div>
         </div>
