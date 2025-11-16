@@ -46,7 +46,7 @@ export default function DownloadAppPage() {
             <div className="w-24 h-24 mx-auto mb-4 bg-gradient-to-br from-purple-600 to-amber-500 rounded-2xl flex items-center justify-center">
               <span className="text-2xl font-bold">🌙</span>
             </div>
-            <h1 className="text-3xl font-bold mb-2">タロット大全</h1>
+            <h1 className="text-3xl font-bold mb-2">無料タロット占い - 毎日の運勢とカード占い</h1>
             <p className="text-xl text-purple-300">Tarot Encyclopedia</p>
           </div>
           <div className="text-lg text-gray-300">読み込み中...</div>
@@ -62,7 +62,7 @@ export default function DownloadAppPage() {
           <div className="w-24 h-24 mx-auto mb-4 bg-gradient-to-br from-purple-600 to-amber-500 rounded-2xl flex items-center justify-center">
             <span className="text-2xl font-bold">🌙</span>
           </div>
-          <h1 className="text-3xl font-bold mb-2">タロット大全</h1>
+          <h1 className="text-3xl font-bold mb-2">無料タロット占い - 毎日の運勢とカード占い</h1>
           <p className="text-xl text-purple-300">Tarot Encyclopedia</p>
         </div>
 

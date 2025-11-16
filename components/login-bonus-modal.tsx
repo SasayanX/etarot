@@ -393,60 +393,68 @@ export function LoginBonusModal({ isOpen, onClose }: LoginBonusModalProps) {
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="bg-gradient-to-b from-purple-900 to-gray-900 border-amber-500 max-w-md mx-auto">
-        <DialogHeader>
-          <DialogTitle className="text-center text-2xl font-bold text-amber-400 flex items-center justify-center gap-2">
-            <Gift className="h-6 w-6 text-amber-400" />
-            デイリーログインボーナス
-            <Gift className="h-6 w-6 text-amber-400" />
-          </DialogTitle>
+      <DialogContent className="bg-transparent border-none shadow-none p-0 max-w-md mx-auto">
+        <DialogHeader className="sr-only">
+          <DialogTitle>デイリーログインボーナス</DialogTitle>
         </DialogHeader>
 
-        <div className="flex flex-col items-center justify-center py-6 space-y-6">
-          <motion.div
-            animate={{
-              scale: scale,
-              rotate: rotate,
-            }}
-            transition={{ type: "spring", stiffness: 300, damping: 10 }}
-            className="relative"
-          >
-            <div className="bg-purple-800 rounded-full p-8 border-4 border-amber-500 relative overflow-hidden">
-              <span className="text-4xl font-bold text-amber-400">+{BONUS_AMOUNT}</span>
-              <span className="text-xl font-bold text-amber-300 ml-1">TP</span>
+        <div className="rounded-[32px] border border-amber-400/30 bg-gradient-to-b from-[#1a0f25] to-[#0b0812] shadow-[0_25px_70px_rgba(0,0,0,0.6)] overflow-hidden">
+          <div className="relative h-80 w-full">
+            <img
+              src="/Lydia_login.png"
+              alt="リディアのログインボーナス"
+              className="h-full w-full object-cover"
+              onError={(e) => {
+                e.currentTarget.src = "/placeholder.svg?height=400&width=600&text=Lydia"
+              }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
 
-              {showConfetti && (
-                <motion.div
-                  className="absolute inset-0 flex items-center justify-center"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                >
-                  <Sparkles className="h-full w-full text-amber-400 absolute" />
-                </motion.div>
-              )}
+            <div className="absolute inset-x-0 bottom-0 p-6 space-y-3 text-white">
+              <div className="flex items-center gap-2 text-xs tracking-[0.35em] uppercase text-amber-200">
+                <Gift className="h-4 w-4 text-amber-300" />
+                Daily Login Bonus
+              </div>
+
+              <motion.div
+                animate={{ scale, rotate }}
+                transition={{ type: "spring", stiffness: 260, damping: 18 }}
+                className="flex items-end gap-2"
+              >
+                <p className="text-4xl font-black text-amber-200 drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)]">+{BONUS_AMOUNT}</p>
+                <p className="pb-2 text-lg font-semibold text-amber-100">TP</p>
+
+                {showConfetti && <Sparkles className="h-6 w-6 text-amber-200" />}
+              </motion.div>
+
+              <p className="text-sm text-purple-100 leading-relaxed">
+                リディアからの贈り物です。毎日ログインして、特別なカードバックを解放していきましょう。
+              </p>
             </div>
-          </motion.div>
+          </div>
 
-          <p className="text-center text-purple-200">
-            本日のログインボーナスです！
-            <br />
-            毎日ログインして報酬をゲットしましょう。
-          </p>
+          <div className="p-6 space-y-5 text-white">
+            <div className="rounded-2xl bg-black/30 border border-white/10 p-4 text-sm text-purple-100 leading-relaxed">
+              次のログインボーナスまで、
+              <span className="text-amber-300 font-semibold"> 24時間 </span>
+              あります。連続ログインで限定デザインを手に入れましょう。
+            </div>
 
-          <Button
-            onClick={collectBonus}
-            disabled={collected}
-            className={`w-full ${
-              collected ? "bg-green-700 hover:bg-green-700 cursor-not-allowed" : "bg-amber-600 hover:bg-amber-500"
-            }`}
-          >
-            {collected ? "受け取り済み" : "ボーナスを受け取る"}
-          </Button>
+            <Button
+              onClick={collectBonus}
+              disabled={collected}
+              className={`w-full text-lg font-semibold shadow-lg ${
+                collected
+                  ? "bg-emerald-600 hover:bg-emerald-600 cursor-not-allowed"
+                  : "bg-amber-400/90 hover:bg-amber-300 text-black"
+              }`}
+            >
+              {collected ? "受け取り済み" : "ボーナスを受け取る"}
+            </Button>
+          </div>
         </div>
       </DialogContent>
 
-      {/* WebView用のconfettiキャンバス */}
       {isWebView() && (
         <canvas
           ref={canvasRef}

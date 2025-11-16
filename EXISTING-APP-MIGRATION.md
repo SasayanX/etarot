@@ -7,7 +7,7 @@
 
 ### **現在公開中のアプリ**
 - **アプリID**: `com.ryuka.kanau_kiryu`
-- **アプリ名**: タロット大全
+- **アプリ名**: 無料タロット占い - 毎日の運勢とカード占い
 - **参照URL**: `https://tarot.kanau-kiryu.com`（ロリポップ）
 - **ストア**: Google Play
 - **状態**: 公開中・既存ユーザーあり
@@ -33,7 +33,7 @@
 1. **アプリID**: `com.ryuka.kanau_kiryu`（同じまま）
 2. **AdMob設定**: そのまま維持
 3. **課金機能**: そのまま維持
-4. **アプリ名**: 同じまま
+4. **アプリ名**: 同じまま（無料タロット占い - 毎日の運勢とカード占い）
 5. **アイコン**: 同じまま
 
 ---
@@ -61,7 +61,7 @@ defaultConfig {
 ```typescript
 const config: CapacitorConfig = {
   appId: "com.ryuka.kanau_kiryu", // ✅ 既存と同じ
-  appName: "タロット大全",         // ✅ 既存と同じ
+  appName: "無料タロット占い - 毎日の運勢とカード占い",         // ✅ 既存と同じ
   webDir: "out",
   server: {
     url: "https://etarot.netlify.app", // 🆕 Netlify URL
@@ -177,7 +177,7 @@ ls -l app/build/outputs/apk/release/app-release.apk
 ### **Step 2: Google Play Console**
 
 1. https://play.google.com/console にアクセス
-2. 既存アプリ「タロット大全」を選択
+2. 既存アプリ「無料タロット占い - 毎日の運勢とカード占い」を選択
 3. **製品版** → **新しいリリースを作成**
 
 ### **Step 3: APKアップロード**
@@ -204,7 +204,7 @@ ls -l app/build/outputs/apk/release/app-release.apk
 ・各種バグを修正
 ・アプリの安定性を向上
 
-引き続きタロット大全をお楽しみください！
+引き続き「無料タロット占い - 毎日の運勢とカード占い」をお楽しみください！
 ```
 
 ### **Step 5: 段階的ロールアウト（推奨）** 🛡️
@@ -236,7 +236,7 @@ ls -l app/build/outputs/apk/release/app-release.apk
 ### **アップデート時の動作**
 
 1. **Google Playで更新通知**
-   - 「タロット大全 v2.0.0が利用可能」
+   - 「無料タロット占い - 毎日の運勢とカード占い v2.0.0が利用可能」
 
 2. **ユーザーが更新をタップ**
    - 既存アプリが上書きインストール
@@ -424,7 +424,7 @@ keytool -list -v -keystore android/app/etarot-release.jks
 
 ## 🎉 完了！
 
-この手順で、既存の「タロット大全」アプリを、
+この手順で、既存の「無料タロット占い - 毎日の運勢とカード占い」アプリを、
 Netlifyの最適化された環境に移行できます！
 
 ### **メリットまとめ**

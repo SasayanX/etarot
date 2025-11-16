@@ -2,7 +2,7 @@ import type { CapacitorConfig } from "@capacitor/cli"
 
 const config: CapacitorConfig = {
   appId: "com.etarot.app",
-  appName: "タロット大全",
+  appName: "無料タロット占い - 毎日の運勢とカード占い",
   webDir: "wrapper",
   server: {
     url: "https://your-etarot-domain.com",

@@ -71,7 +71,7 @@ java -version     # 17以上
 // capacitor.config.ts
 const config: CapacitorConfig = {
   appId: "com.etarot.app",
-  appName: "タロット大全",
+  appName: "無料タロット占い - 毎日の運勢とカード占い",
   webDir: "out", // Next.js 静的エクスポート
   server: {
     url: "https://etarot.netlify.app", // Netlify URL
@@ -256,7 +256,7 @@ android/app/src/main/res/drawable/splash.png
 
 ```typescript
 // capacitor.config.ts
-appName: "タロット大全 v2", // 新しい名前
+appName: "無料タロット占い - 毎日の運勢とカード占い v2", // 新しい名前
 ```
 
 ---

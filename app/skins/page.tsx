@@ -23,6 +23,7 @@ interface CardBack {
   name: string
   description: string
   image: string
+  lockedImage?: string
   price?: number // TPでの価格
   adRequired?: boolean // 広告視聴が必要か
   unlockCondition?: string // 解放条件の説明
@@ -133,7 +134,8 @@ export default function SkinsPage() {
         id: "lydia-back-30",
         name: t("cardback.lydia30.name"),
         description: t("cardback.lydia30.description"),
-        image: "/Lydia_Back30.png",
+        image: "/Lydia30.PNG",
+        lockedImage: "/Lydia30_Login_Secret.png",
         unlockCondition: t("cardback.lydia30.condition"),
         isUnlocked: false,
         category: "special",
@@ -142,7 +144,8 @@ export default function SkinsPage() {
         id: "lydia-back-60",
         name: t("cardback.lydia60.name"),
         description: t("cardback.lydia60.description"),
-        image: "/Lydia_Back60.png",
+        image: "/Lydia60.PNG",
+        lockedImage: "/Lydia60_Login_Secret.png",
         unlockCondition: t("cardback.lydia60.condition"),
         isUnlocked: false,
         category: "special",
@@ -811,7 +814,8 @@ export default function SkinsPage() {
 
   // カードバック画像をレンダリングする関数
   const renderCardBackImage = (suit: CardBack) => {
-    const imageUrl = safeImageUrl(suit.image, suit.id)
+    const sourceImage = suit.isUnlocked ? suit.image : suit.lockedImage || suit.image
+    const imageUrl = safeImageUrl(sourceImage, suit.id)
 
     return (
       <div className="aspect-[3/4] bg-gray-800 overflow-hidden rounded-t-lg flex items-center justify-center">

@@ -194,7 +194,7 @@ npx cap sync android
 
 #### **ログ確認**
 ```bash
-adb logcat | findstr "タロット大全"
+adb logcat | findstr "無料タロット占い - 毎日の運勢とカード占い"
 ```
 
 または Android Studioの **Logcat** タブで確認

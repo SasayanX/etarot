@@ -132,7 +132,7 @@ ls -l android/app/build/outputs/apk/release/app-release.apk
 ### **Step 2: Google Play Console**
 
 1. https://play.google.com/console にアクセス
-2. **「タロット大全」** アプリを選択
+2. **「無料タロット占い - 毎日の運勢とカード占い」** アプリを選択
 3. **製品版** → **新しいリリースを作成**
 
 ### **Step 3: APKアップロード**
@@ -160,7 +160,7 @@ ls -l android/app/build/outputs/apk/release/app-release.apk
 ・各種バグを修正し、より安定した動作
 ・UI/UXの改善
 
-引き続きタロット大全をお楽しみください！
+引き続き「無料タロット占い - 毎日の運勢とカード占い」をお楽しみください！
 ```
 
 ### **Step 5: 段階的ロールアウト（推奨）**
@@ -331,7 +331,7 @@ npm run apk:release
 ## 🎉 完了！
 
 すべての準備が整いました！
-既存の「タロット大全」アプリの新バージョン（v2.5）として、
+既存の「無料タロット占い - 毎日の運勢とカード占い」アプリの新バージョン（v2.5）として、
 Netlify最適化版をGoogle Playに公開できます！
 
 ### **期待される効果**

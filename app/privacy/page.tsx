@@ -15,7 +15,7 @@ export default function PrivacyPolicy() {
           <section>
             <h2 className="text-xl font-semibold text-blue-400 mb-3">1. はじめに</h2>
             <p className="text-gray-300 leading-relaxed">
-              金雨輝龍のタロット大全（以下「当アプリ」）は、ユーザーのプライバシーを尊重し、個人情報の保護に努めています。
+              金雨輝龍の「無料タロット占い - 毎日の運勢とカード占い」（以下「当アプリ」）は、ユーザーのプライバシーを尊重し、個人情報の保護に努めています。
               このプライバシーポリシーでは、当アプリがどのように情報を収集、使用、保護するかについて説明します。
               当アプリを利用することにより、ユーザーはこのプライバシーポリシーに同意したものとみなされます。
             </p>
@@ -123,7 +123,7 @@ export default function PrivacyPolicy() {
           </section>
 
           <div className="mt-8 pt-4 border-t border-gray-700 text-center text-gray-400 text-sm">
-            © 2025 金雨輝龍のタロット大全. All rights reserved.
+            © 2025 金雨輝龍の「無料タロット占い - 毎日の運勢とカード占い」. All rights reserved.
           </div>
         </CardContent>
       </Card>
