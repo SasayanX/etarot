@@ -337,6 +337,12 @@ export function LoginBonusModal({ isOpen, onClose }: LoginBonusModalProps) {
       setTimeout(() => setScale(1), 300)
       setTimeout(() => setRotate(0), 300)
 
+      // まず、lastLoginBonusDateを更新して重複受領を防ぐ
+      if (typeof window !== "undefined") {
+        const today = new Date().toISOString().split("T")[0] // YYYY-MM-DD形式
+        localStorage.setItem("lastLoginBonusDate", today)
+      }
+
       // TPを追加
       if (typeof addPoints === "function") {
         addPoints(BONUS_AMOUNT)
