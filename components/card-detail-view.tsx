@@ -484,10 +484,10 @@ export default function CardDetailView({ card, onClose, textToSpeechEnabled }: C
           <h2 className="text-xl font-bold text-white">{card.name}</h2>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-white transition-colors"
+            className="bg-amber-600 hover:bg-amber-700 text-white rounded-full p-2 transition-colors shadow-lg"
             aria-label={t("card.detail.close")}
           >
-            <X size={24} />
+            <X size={20} />
           </button>
         </div>
 

@@ -501,7 +501,7 @@ export default function DictionaryPage() {
       <div className="flex mb-6 border-b border-amber-500/50 bg-gray-800/50 rounded-t-lg">
         <button
           className={`px-4 py-2 text-lg font-medium transition-colors ${
-            activeTab === "major" ? "text-amber-400 border-b-2 border-amber-400 bg-purple-900/50" : "text-purple-200 hover:text-amber-300 hover:bg-gray-800/70"
+            activeTab === "major" ? "text-white border-b-2 border-amber-400 bg-amber-600" : "text-gray-300 hover:text-white hover:bg-gray-700"
           }`}
           onClick={() => {
             showAd("dictionary_major")
@@ -512,7 +512,7 @@ export default function DictionaryPage() {
         </button>
         <button
           className={`px-4 py-2 text-lg font-medium transition-colors ${
-            activeTab === "minor" ? "text-amber-400 border-b-2 border-amber-400 bg-purple-900/50" : "text-purple-200 hover:text-amber-300 hover:bg-gray-800/70"
+            activeTab === "minor" ? "text-white border-b-2 border-amber-400 bg-amber-600" : "text-gray-300 hover:text-white hover:bg-gray-700"
           }`}
           onClick={() => {
             showAd("dictionary_minor")
@@ -523,7 +523,7 @@ export default function DictionaryPage() {
         </button>
         <button
           className={`px-4 py-2 text-lg font-medium transition-colors ${
-            activeTab === "wands" ? "text-amber-400 border-b-2 border-amber-400 bg-purple-900/50" : "text-purple-200 hover:text-amber-300 hover:bg-gray-800/70"
+            activeTab === "wands" ? "text-white border-b-2 border-amber-400 bg-amber-600" : "text-gray-300 hover:text-white hover:bg-gray-700"
           }`}
           onClick={() => {
             showAd("dictionary_wands")
@@ -534,7 +534,7 @@ export default function DictionaryPage() {
         </button>
         <button
           className={`px-4 py-2 text-lg font-medium transition-colors ${
-            activeTab === "cups" ? "text-amber-400 border-b-2 border-amber-400 bg-purple-900/50" : "text-purple-200 hover:text-amber-300 hover:bg-gray-800/70"
+            activeTab === "cups" ? "text-white border-b-2 border-amber-400 bg-amber-600" : "text-gray-300 hover:text-white hover:bg-gray-700"
           }`}
           onClick={() => {
             showAd("dictionary_cups")
@@ -545,7 +545,7 @@ export default function DictionaryPage() {
         </button>
         <button
           className={`px-4 py-2 text-lg font-medium transition-colors ${
-            activeTab === "swords" ? "text-amber-400 border-b-2 border-amber-400 bg-purple-900/50" : "text-purple-200 hover:text-amber-300 hover:bg-gray-800/70"
+            activeTab === "swords" ? "text-white border-b-2 border-amber-400 bg-amber-600" : "text-gray-300 hover:text-white hover:bg-gray-700"
           }`}
           onClick={() => {
             showAd("dictionary_swords")
@@ -556,7 +556,7 @@ export default function DictionaryPage() {
         </button>
         <button
           className={`px-4 py-2 text-lg font-medium transition-colors ${
-            activeTab === "pentacles" ? "text-amber-400 border-b-2 border-amber-400 bg-purple-900/50" : "text-purple-200 hover:text-amber-300 hover:bg-gray-800/70"
+            activeTab === "pentacles" ? "text-white border-b-2 border-amber-400 bg-amber-600" : "text-gray-300 hover:text-white hover:bg-gray-700"
           }`}
           onClick={() => {
             showAd("dictionary_pentacles")
