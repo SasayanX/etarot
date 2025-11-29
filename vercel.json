@@ -3,15 +3,10 @@
   "name": "e-tarot-optimized",
   "framework": "nextjs",
   "buildCommand": "npm run build:prod",
-  "outputDirectory": ".next",
+  "outputDirectory": "out",
   "installCommand": "npm install --legacy-peer-deps",
   "devCommand": "npm run dev",
   "regions": ["nrt1"],
-  "functions": {
-    "app/api/**/*.ts": {
-      "runtime": "nodejs18.x"
-    }
-  },
   "headers": [
     {
       "source": "/(.*)",
