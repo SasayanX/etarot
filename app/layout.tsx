@@ -11,6 +11,7 @@ import { LanguageProvider } from "@/contexts/language-context"
 import BottomNavigation from "@/components/bottom-navigation"
 import CardSuitInitializer from "@/components/card-suit-initializer"
 import PerformanceMonitor from "@/components/performance-monitor"
+import Footer from "@/components/footer"
 import Script from "next/script"
 
 const inter = Inter({ subsets: ["latin"] })
@@ -121,6 +122,7 @@ export default function RootLayout({
                 <DebugProvider>
                   <CardSuitInitializer />
                   <main className="pb-16">{children}</main>
+                  <Footer />
                   <Toaster />
                   <BottomNavigation />
                   <PerformanceMonitor />
