@@ -2,28 +2,28 @@
 // カードバックの選択と管理を行う
 
 // 金南輝能デザインのURLを定数として定義
-export const GOLDEN_DRAGON_URL = "/default-tarot-card-back.png"
+export const GOLDEN_DRAGON_URL = "/default-tarot-card-back.webp"
 
 // カードバックのマッピング（ID → 画像パス）
 export const CARD_BACK_MAPPING: Record<string, string> = {
-  default: "/default-tarot-card-back.png",
-  moonlight: "/moonlight-tarot-card-back.png",
-  crystal: "/crystal-tarot-card-back.png",
-  golden: "/golden-tarot-back.png",
-  mystic: "/mystic-tarot-back.png",
-  royal: "/royal-tarot-card-back.png",
-  cosmic: "/cosmic-tarot-back.png",
-  sakura: "/cardback-sakura.png",
-  halloween: "/cardback-halloween.png",
+  default: "/default-tarot-card-back.webp",
+  moonlight: "/moonlight-tarot-card-back.webp",
+  crystal: "/crystal-tarot-card-back.webp",
+  golden: "/golden-tarot-back.webp",
+  mystic: "/mystic-tarot-back.webp",
+  royal: "/royal-tarot-card-back.webp",
+  cosmic: "/cosmic-tarot-back.webp",
+  sakura: "/cardback-sakura.webp",
+  halloween: "/cardback-halloween.webp",
   winter: "/winter-tarot-back.png",
-  elemental: "/four-symbols-tarot-back.png",
-  "four-symbols": "/four-symbols-tarot-back.png",
-  fourSymbols: "/four-symbols-tarot-back.png",
-  "snow-queen": "/snow-queen-tarot-back.png",
-  snowQueen: "/snow-queen-tarot-back.png",
-  dragon: "/dragon-tarot-back.png",
-  "golden-dragon": "/default-tarot-card-back.png",
-  goldenDragon: "/default-tarot-card-back.png",
+  elemental: "/four-symbols-tarot-back.webp",
+  "four-symbols": "/four-symbols-tarot-back.webp",
+  fourSymbols: "/four-symbols-tarot-back.webp",
+  "snow-queen": "/snow-queen-tarot-back.webp",
+  snowQueen: "/snow-queen-tarot-back.webp",
+  dragon: "/dragon-tarot-back.webp",
+  "golden-dragon": "/default-tarot-card-back.webp",
+  goldenDragon: "/default-tarot-card-back.webp",
   "lydia-back-30": "/Lydia30.PNG",
   "lydia-back-60": "/Lydia60.PNG",
 }
@@ -45,7 +45,7 @@ let isInitialized = false
 // 現在選択されているカードバックの情報
 let currentCardBackInfo = {
   id: "default",
-  imageUrl: "/default-tarot-card-back.png",
+  imageUrl: "/default-tarot-card-back.webp",
   timestamp: Date.now(),
 }
 
@@ -242,7 +242,7 @@ export function initCardBackManager() {
     // エラー時はデフォルト値を設定
     currentCardBackInfo = {
       id: "default",
-      imageUrl: "/default-tarot-card-back.png",
+      imageUrl: "/default-tarot-card-back.webp",
       timestamp: Date.now(),
     }
 

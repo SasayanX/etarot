@@ -162,7 +162,7 @@ export default function TarotCard({
             className="w-full h-full object-cover"
             onError={(e) => {
               console.error("Failed to load card back image")
-              e.currentTarget.src = "/default-tarot-card-back.png" // より確実なフォールバック
+              e.currentTarget.src = "/default-tarot-card-back.webp" // より確実なフォールバック
             }}
             crossOrigin="anonymous"
           />

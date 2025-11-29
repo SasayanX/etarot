@@ -4,29 +4,29 @@
 
 // カードバックのマッピング（IDとURL）
 export const CARD_BACKS_URLS: Record<string, string> = {
-  default: "/default-tarot-card-back.png",
-  moonlight: "/moonlight-tarot-card-back.png",
-  crystal: "/crystal-tarot-card-back.png",
-  cosmic: "/cosmic-tarot-back.png",
-  royal: "/royal-tarot-card-back.png",
-  mystic: "/mystic-tarot-back.png",
-  golden: "/golden-tarot-back.png",
-  dragon: "/dragon-tarot-back.png",
-  sakura: "/cardback-sakura.png",
-  halloween: "/cardback-halloween.png",
+  default: "/default-tarot-card-back.webp",
+  moonlight: "/moonlight-tarot-card-back.webp",
+  crystal: "/crystal-tarot-card-back.webp",
+  cosmic: "/cosmic-tarot-back.webp",
+  royal: "/royal-tarot-card-back.webp",
+  mystic: "/mystic-tarot-back.webp",
+  golden: "/golden-tarot-back.webp",
+  dragon: "/dragon-tarot-back.webp",
+  sakura: "/cardback-sakura.webp",
+  halloween: "/cardback-halloween.webp",
   winter: "/winter-tarot-back.png",
-  elemental: "/four-symbols-tarot-back.png",
-  "four-symbols": "/four-symbols-tarot-back.png",
-  "snow-queen": "/snow-queen-tarot-back.png",
-  "golden-dragon": "/default-tarot-card-back.png",
+  elemental: "/four-symbols-tarot-back.webp",
+  "four-symbols": "/four-symbols-tarot-back.webp",
+  "snow-queen": "/snow-queen-tarot-back.webp",
+  "golden-dragon": "/default-tarot-card-back.webp",
   "cardback-winter": "/cardback-winter.png",
-  "cardback-halloween": "/cardback-halloween.png",
-  "cardback-sakura": "/cardback-sakura.png",
+  "cardback-halloween": "/cardback-halloween.webp",
+  "cardback-sakura": "/cardback-sakura.webp",
   "cardback-elemental": "/cardback-elemental.png",
 }
 
 // デフォルトのカードバック画像パス
-const DEFAULT_CARD_BACK = "/default-tarot-card-back.png"
+const DEFAULT_CARD_BACK = "/default-tarot-card-back.webp"
 
 /**
  * 現在選択されているカードバックのURLを取得する

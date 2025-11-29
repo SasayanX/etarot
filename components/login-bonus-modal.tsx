@@ -407,7 +407,7 @@ export function LoginBonusModal({ isOpen, onClose }: LoginBonusModalProps) {
         <div className="rounded-[32px] border border-amber-400/30 bg-gradient-to-b from-[#1a0f25] to-[#0b0812] shadow-[0_25px_70px_rgba(0,0,0,0.6)] overflow-hidden">
           <div className="relative h-80 w-full">
             <img
-              src="/Lydia_login.png"
+              src="/Lydia_login.webp"
               alt="リディアのログインボーナス"
               className="h-full w-full object-cover"
               onError={(e) => {

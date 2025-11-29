@@ -90,7 +90,7 @@ const FortunePageOptimized = memoWithPerformanceMonitoring(() => {
   const [fortuneCards, setFortuneCards] = useState<FortuneCard[]>([])
   const [reading, setReading] = useState("")
   const [isComplete, setIsComplete] = useState(false)
-  const [cardBackImage, setCardBackImage] = useState("/default-tarot-card-back.png")
+  const [cardBackImage, setCardBackImage] = useState("/default-tarot-card-back.webp")
   const [cardLoadError, setCardLoadError] = useState(false)
 
   // カードバック画像の更新

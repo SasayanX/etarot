@@ -27,7 +27,7 @@ export default function CardGrid({
   const [activeFilter, setActiveFilter] = useState<string | null>(null)
   const [filteredCards, setFilteredCards] = useState<Card[]>(cards)
   const [isSearchFocused, setIsSearchFocused] = useState(false)
-  const [cardBackImage, setCardBackImage] = useState("/royal-tarot-card-back.png")
+  const [cardBackImage, setCardBackImage] = useState("/royal-tarot-card-back.webp")
 
   useEffect(() => {
     // ローカルストレージからカードバック画像を取得

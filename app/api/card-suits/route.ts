@@ -17,7 +17,7 @@ const cardSuits = [
   {
     id: "golden",
     name: "ゴールデン",
-    image: "/golden-tarot-back.png",
+    image: "/golden-tarot-back.webp",
     category: "premium",
   },
   {
@@ -30,13 +30,13 @@ const cardSuits = [
   {
     id: "mystic",
     name: "ミスティック",
-    image: "/mystic-tarot-back.png",
+    image: "/mystic-tarot-back.webp",
     category: "premium",
   },
   {
     id: "royal",
     name: "ロイヤル",
-    image: "/royal-tarot-card-back.png",
+    image: "/royal-tarot-card-back.webp",
     category: "premium",
   },
   {
@@ -55,19 +55,19 @@ const cardSuits = [
   {
     id: "elemental",
     name: "四神",
-    image: "/four-symbols-tarot-back.png",
+    image: "/four-symbols-tarot-back.webp",
     category: "special",
   },
   {
     id: "sakura",
     name: "サクラ",
-    image: "/cardback-sakura.png",
+    image: "/cardback-sakura.webp",
     category: "seasonal",
   },
   {
     id: "halloween",
     name: "ハロウィン",
-    image: "/cardback-halloween.png",
+    image: "/cardback-halloween.webp",
     category: "seasonal",
   },
   {

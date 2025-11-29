@@ -38,7 +38,7 @@ interface CardBack {
 import { selectCardBack, GOLDEN_DRAGON_URL } from "@/utils/card-back-manager"
 
 // ドラゴンカードバックのプレースホルダー画像URLを更新
-const DRAGON_PLACEHOLDER = "/dragon-tarot-back.png" // 実際の画像パスに変更
+const DRAGON_PLACEHOLDER = "/dragon-tarot-back.webp" // 実際の画像パスに変更
 
 // ファイルの先頭に追加
 import { useLanguage } from "@/contexts/language-context"
@@ -67,7 +67,7 @@ export default function SkinsPage() {
         id: "default",
         name: t("cardback.default.name"),
         description: t("cardback.default.description"),
-        image: "/default-tarot-card-back.png",
+        image: "/default-tarot-card-back.webp",
         isUnlocked: true,
         isSelected: true,
         category: "basic",
@@ -76,7 +76,7 @@ export default function SkinsPage() {
         id: "moonlight",
         name: t("cardback.moonlight.name"),
         description: t("cardback.moonlight.description"),
-        image: "/moonlight-tarot-card-back.png",
+        image: "/moonlight-tarot-card-back.webp",
         price: 5000,
         isUnlocked: false,
         category: "premium",
@@ -85,7 +85,7 @@ export default function SkinsPage() {
         id: "golden",
         name: t("cardback.golden.name"),
         description: t("cardback.golden.description"),
-        image: "/golden-tarot-back.png",
+        image: "/golden-tarot-back.webp",
         price: 7500,
         isUnlocked: false,
         category: "premium",
@@ -94,7 +94,7 @@ export default function SkinsPage() {
         id: "crystal",
         name: t("cardback.crystal.name"),
         description: t("cardback.crystal.description"),
-        image: "/crystal-tarot-card-back.png",
+        image: "/crystal-tarot-card-back.webp",
         price: 6500,
         isUnlocked: false,
         category: "premium",
@@ -104,7 +104,7 @@ export default function SkinsPage() {
         id: "mystic",
         name: t("cardback.mystic.name"),
         description: t("cardback.mystic.description"),
-        image: "/mystic-tarot-back.png",
+        image: "/mystic-tarot-back.webp",
         price: 6000,
         isUnlocked: false,
         category: "premium",
@@ -114,7 +114,7 @@ export default function SkinsPage() {
         id: "royal",
         name: t("cardback.royal.name"),
         description: t("cardback.royal.description"),
-        image: "/royal-tarot-card-back.png",
+        image: "/royal-tarot-card-back.webp",
         price: 8500,
         isUnlocked: false,
         category: "premium",
@@ -124,7 +124,7 @@ export default function SkinsPage() {
         id: "dragon",
         name: t("cardback.dragon.name"),
         description: t("cardback.dragon.description"),
-        image: "/dragon-tarot-back.png",
+        image: "/dragon-tarot-back.webp",
         price: 9999,
         isUnlocked: false,
         category: "premium",
@@ -135,7 +135,7 @@ export default function SkinsPage() {
         name: t("cardback.lydia30.name"),
         description: t("cardback.lydia30.description"),
         image: "/Lydia30.PNG",
-        lockedImage: "/Lydia30_Login_Secret.png",
+        lockedImage: "/Lydia30_Login_Secret.webp",
         unlockCondition: t("cardback.lydia30.condition"),
         isUnlocked: false,
         category: "special",
@@ -145,7 +145,7 @@ export default function SkinsPage() {
         name: t("cardback.lydia60.name"),
         description: t("cardback.lydia60.description"),
         image: "/Lydia60.PNG",
-        lockedImage: "/Lydia60_Login_Secret.png",
+        lockedImage: "/Lydia60_Login_Secret.webp",
         unlockCondition: t("cardback.lydia60.condition"),
         isUnlocked: false,
         category: "special",
@@ -154,7 +154,7 @@ export default function SkinsPage() {
         id: "cosmic",
         name: t("cardback.cosmic.name"),
         description: t("cardback.cosmic.description"),
-        image: "/cosmic-tarot-back.png",
+        image: "/cosmic-tarot-back.webp",
         isHidden: true,
         unlockCondition: t("cardback.cosmic.condition"),
         isUnlocked: false,
@@ -164,7 +164,7 @@ export default function SkinsPage() {
         id: "elemental",
         name: t("cardback.elemental.name"),
         description: t("cardback.elemental.description"),
-        image: "/four-symbols-tarot-back.png",
+        image: "/four-symbols-tarot-back.webp",
         price: 9999,
         isUnlocked: false,
         category: "premium",
@@ -174,7 +174,7 @@ export default function SkinsPage() {
         id: "sakura",
         name: t("cardback.sakura.name"),
         description: t("cardback.sakura.description"),
-        image: "/cardback-sakura.png",
+        image: "/cardback-sakura.webp",
         isHidden: true,
         unlockCondition: t("cardback.sakura.condition"),
         isUnlocked: false,
@@ -184,7 +184,7 @@ export default function SkinsPage() {
         id: "halloween",
         name: t("cardback.halloween.name"),
         description: t("cardback.halloween.description"),
-        image: "/cardback-halloween.png",
+        image: "/cardback-halloween.webp",
         price: 4500,
         isUnlocked: false,
         category: "seasonal",
@@ -194,7 +194,7 @@ export default function SkinsPage() {
         id: "snow-queen",
         name: t("cardback.snowQueen.name"),
         description: t("cardback.snowQueen.description"),
-        image: "/snow-queen-tarot-back.png",
+        image: "/snow-queen-tarot-back.webp",
         price: 5500,
         isUnlocked: false,
         category: "premium",
@@ -209,7 +209,7 @@ export default function SkinsPage() {
   // カードは常に裏面を表示するように設定
   const [isPreviewFlipped, setIsPreviewFlipped] = useState(true)
   // 選択されたスキンをデフォルトデザインに初期化
-  const [selectedSkin, setSelectedSkin] = useState<string | null>("/default-tarot-card-back.png")
+  const [selectedSkin, setSelectedSkin] = useState<string | null>("/default-tarot-card-back.webp")
   // 画像読み込みエラーの状態を追跡
   const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({})
   // 選択中のカードバックID
@@ -388,7 +388,7 @@ export default function SkinsPage() {
                   ...suit,
                   isUnlocked: ownedSuitsList.includes("dragon"),
                   isSelected: selectedSuit === "dragon",
-                  image: "/dragon-tarot-back.png",
+                  image: "/dragon-tarot-back.webp",
                 }
               }
 
@@ -424,7 +424,7 @@ export default function SkinsPage() {
                 suit.id === "default"
                   ? GOLDEN_DRAGON_URL
                   : suit.id === "dragon"
-                    ? "/dragon-tarot-back.png"
+                    ? "/dragon-tarot-back.webp"
                     : suit.image,
             }))
           })
@@ -440,7 +440,7 @@ export default function SkinsPage() {
             isUnlocked: ownedSuitsList.includes(suit.id),
             isSelected: suit.id === selectedSuit,
             image:
-              suit.id === "default" ? GOLDEN_DRAGON_URL : suit.id === "dragon" ? "/dragon-tarot-back.png" : suit.image,
+              suit.id === "default" ? GOLDEN_DRAGON_URL : suit.id === "dragon" ? "/dragon-tarot-back.webp" : suit.image,
           }))
         })
       }
@@ -587,15 +587,15 @@ export default function SkinsPage() {
           setTimeout(() => {
             console.log("Dragon card back selected - ensuring it's properly saved")
             localStorage.setItem("selectedSuit", "dragon")
-            localStorage.setItem("selectedCardBack", "/dragon-tarot-back.png")
+            localStorage.setItem("selectedCardBack", "/dragon-tarot-back.webp")
             localStorage.setItem("fortuneCardBack", "dragon")
-            localStorage.setItem("fortuneCardBackUrl", "/dragon-tarot-back.png")
+            localStorage.setItem("fortuneCardBackUrl", "/dragon-tarot-back.webp")
 
             // イベントを発火
             const event = new CustomEvent("cardSuitChanged", {
               detail: {
                 suitId: "dragon",
-                imageUrl: "/dragon-tarot-back.png",
+                imageUrl: "/dragon-tarot-back.webp",
                 timestamp: Date.now(),
               },
               bubbles: true,
@@ -898,10 +898,10 @@ export default function SkinsPage() {
           <div className="flex flex-col items-center">
             <div className="relative w-64 h-96 rounded-lg overflow-hidden border-2 border-amber-500">
               <img
-                src={selectedSkin || "/default-tarot-card-back.png"}
+                src={selectedSkin || "/default-tarot-card-back.webp"}
                 alt={t("shop.current.cardback")}
                 className="w-full h-full object-cover"
-                onError={(e) => onImageError(e, "/default-tarot-card-back.png", "default")}
+                onError={(e) => onImageError(e, "/default-tarot-card-back.webp", "default")}
               />
             </div>
             <div className="mt-2 text-center">

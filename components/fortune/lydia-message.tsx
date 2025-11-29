@@ -2,7 +2,7 @@ import Image from "next/image"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 
-const LYDIA_IMAGE_SRC = "/lydia-reading-message.png"
+const LYDIA_IMAGE_SRC = "/lydia-reading-message.webp"
 const LYDIA_URL = "https://protarot.jp/"
 
 interface LydiaMessageProps {

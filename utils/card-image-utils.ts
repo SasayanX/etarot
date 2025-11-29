@@ -37,19 +37,19 @@ export function getCardImagePath(cardId: number): string {
 // カードバックの画像パスを取得する関数
 export function getCardBackImagePath(suitId: string): string {
   const cardBackMap: Record<string, string> = {
-    default: "/default-tarot-card-back.png",
-    moonlight: "/moonlight-tarot-card-back.png",
-    crystal: "/crystal-tarot-card-back.png",
-    golden: "/golden-tarot-back.png",
-    mystic: "/mystic-tarot-back.png",
-    royal: "/royal-tarot-card-back.png",
-    cosmic: "/cosmic-tarot-back.png",
-    sakura: "/cardback-sakura.png",
-    halloween: "/cardback-halloween.png",
+    default: "/default-tarot-card-back.webp",
+    moonlight: "/moonlight-tarot-card-back.webp",
+    crystal: "/crystal-tarot-card-back.webp",
+    golden: "/golden-tarot-back.webp",
+    mystic: "/mystic-tarot-back.webp",
+    royal: "/royal-tarot-card-back.webp",
+    cosmic: "/cosmic-tarot-back.webp",
+    sakura: "/cardback-sakura.webp",
+    halloween: "/cardback-halloween.webp",
     winter: "/cardback-winter.png",
     elemental: "/cardback-elemental.png",
-    fourSymbols: "/four-symbols-tarot-back.png",
-    snowQueen: "/snow-queen-tarot-back.png",
+    fourSymbols: "/four-symbols-tarot-back.webp",
+    snowQueen: "/snow-queen-tarot-back.webp",
     goldenDragon: "/golden-dragon-tarot-back.jpg",
   }
 
