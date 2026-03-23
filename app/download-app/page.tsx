@@ -46,7 +46,7 @@ export default function DownloadAppPage() {
             <div className="w-24 h-24 mx-auto mb-4 bg-gradient-to-br from-purple-600 to-amber-500 rounded-2xl flex items-center justify-center">
               <span className="text-2xl font-bold">🌙</span>
             </div>
-            <h1 className="text-3xl font-bold mb-2">無料タロット占い - 毎日の運勢とカード占い</h1>
+            <h1 className="text-3xl font-bold mb-2">タロット占い【完全無料】今日の運勢・恋愛占い</h1>
             <p className="text-xl text-purple-300">Tarot Encyclopedia</p>
           </div>
           <div className="text-lg text-gray-300">読み込み中...</div>
@@ -140,12 +140,12 @@ export default function DownloadAppPage() {
         {/* デバッグ情報（開発時またはv0プレビューで表示） */}
         {(process.env.NODE_ENV === "development" ||
           (typeof window !== "undefined" && window.location.hostname.includes("v0.dev"))) && (
-          <div className="mt-4 p-2 bg-gray-800 rounded text-xs text-gray-400">
-            <p>User Agent: {userAgent.substring(0, 50)}...</p>
-            <p>Is Mobile: {isMobile ? "Yes" : "No"}</p>
-            <p>Hostname: {typeof window !== "undefined" ? window.location.hostname : "SSR"}</p>
-          </div>
-        )}
+            <div className="mt-4 p-2 bg-gray-800 rounded text-xs text-gray-400">
+              <p>User Agent: {userAgent.substring(0, 50)}...</p>
+              <p>Is Mobile: {isMobile ? "Yes" : "No"}</p>
+              <p>Hostname: {typeof window !== "undefined" ? window.location.hostname : "SSR"}</p>
+            </div>
+          )}
       </div>
     </div>
   )

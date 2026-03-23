@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
 import { Gift, Sparkles } from "lucide-react"
 import confetti from "canvas-confetti"
+import { formatDateKey } from "@/utils/date-key"
 
 interface LoginBonusModalProps {
   isOpen: boolean
@@ -18,6 +19,7 @@ export function LoginBonusModal({ isOpen, onClose }: LoginBonusModalProps) {
   const { addPoints } = useShop()
   const [showConfetti, setShowConfetti] = useState(false)
   const [collected, setCollected] = useState(false)
+  const isCollectingRef = useRef(false)
   const BONUS_AMOUNT = 10 // 5から10に変更
 
   // アニメーション用の状態
@@ -331,15 +333,26 @@ export function LoginBonusModal({ isOpen, onClose }: LoginBonusModalProps) {
   // ボーナス受け取り処理
   const collectBonus = () => {
     try {
+      if (isCollectingRef.current || collected) {
+        return
+      }
+      isCollectingRef.current = true
+
       // アニメーション開始
       setScale(1.2)
       setRotate(10)
       setTimeout(() => setScale(1), 300)
       setTimeout(() => setRotate(0), 300)
 
-      // まず、lastLoginBonusDateを更新して重複受領を防ぐ
+      // まず、ローカル日付ベースで受領状態を即時保存して重複受領を防ぐ
       if (typeof window !== "undefined") {
-        const today = new Date().toISOString().split("T")[0] // YYYY-MM-DD形式
+        const today = formatDateKey(new Date())
+        const alreadyClaimed = localStorage.getItem("lastLoginBonusDate") === today
+        if (alreadyClaimed) {
+          setCollected(true)
+          onClose()
+          return
+        }
         localStorage.setItem("lastLoginBonusDate", today)
       }
 
@@ -363,11 +376,13 @@ export function LoginBonusModal({ isOpen, onClose }: LoginBonusModalProps) {
           setShowConfetti(false)
           setCollected(false)
           setHasError(false)
+          isCollectingRef.current = false
         }, 500)
       }, 3000) // 紙吹雪を長く表示するために時間を延長
     } catch (error) {
       console.error("Error collecting bonus:", error)
       setHasError(true)
+      isCollectingRef.current = false
       // エラーが発生しても閉じられるようにする
       setTimeout(() => {
         onClose()

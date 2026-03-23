@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { addSuitToOwned, getOwnedSuits } from "@/utils/card-back-manager"
+import { formatDateKey } from "@/utils/date-key"
 
 const STREAK_STORAGE_KEY = "loginStreak"
 const LAST_LOGIN_KEY = "lastLoginDate"
@@ -18,16 +19,12 @@ const STREAK_REWARDS: StreakReward[] = [
   { days: 60, suitId: "lydia-back-60" },
 ]
 
-const formatDateKey = (date: Date) => {
-  const year = date.getFullYear()
-  const month = `${date.getMonth() + 1}`.padStart(2, "0")
-  const day = `${date.getDate()}`.padStart(2, "0")
-  return `${year}-${month}-${day}`
-}
-
 const parseDateKey = (dateKey: string) => {
-  const [year, month, day] = dateKey.split("-").map((value) => Number.parseInt(value, 10))
-  return new Date(year, (month || 1) - 1, day || 1)
+  const parts = dateKey.split("-").map((value) => Number.parseInt(value, 10))
+  const year = parts[0] || new Date().getFullYear()
+  const month = parts[1] || 1
+  const day = parts[2] || 1
+  return new Date(year, month - 1, day)
 }
 
 const getDayDifference = (currentKey: string, previousKey: string) => {
@@ -127,7 +124,7 @@ export function useLoginBonus() {
 
       try {
         const lastLoginDate = localStorage.getItem("lastLoginBonusDate")
-        const today = new Date().toISOString().split("T")[0] // YYYY-MM-DD形式
+        const today = formatDateKey(new Date()) // ローカルタイムゾーンを使用
 
         console.log("Last login bonus date:", lastLoginDate)
         console.log("Today:", today)
@@ -158,6 +155,8 @@ export function useLoginBonus() {
 
       return () => clearTimeout(timer)
     }
+
+    return undefined
   }, [initialized])
 
   // ログインボーナスを受け取った後の処理

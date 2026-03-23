@@ -17,8 +17,8 @@ import Script from "next/script"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "無料タロット占い - 毎日の運勢とカード占い",
-  description: "完全無料のタロット占い！毎日の運勢・恋愛・仕事を本格カード占いで診断。78枚のタロットカード完全収録。",
+  title: "タロット占い【完全無料】今日の運勢・恋愛占い",
+  description: "完全無料のタロット占い！今日の運勢・恋愛占い・仕事占いを本格カード占いで診断。78枚のタロットカード完全収録。",
   generator: "v0.dev",
   // 検索エンジンインデックス防止
   robots: {
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     robots: "noindex, nofollow, noarchive, nosnippet, noimageindex, nocache",
     googlebot: "noindex, nofollow, noarchive, nosnippet, noimageindex",
     bingbot: "noindex, nofollow, noarchive, nosnippet, noimageindex",
-    keywords: "タロット占い,無料占い,運勢,恋愛占い,仕事占い,毎日占い,カード占い",
+    keywords: "タロット占い,無料占い,今日の運勢,恋愛占い,仕事占い,毎日占い,カード占い,運勢占い",
   },
 }
 
