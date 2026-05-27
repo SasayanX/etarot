@@ -37,15 +37,15 @@ export default function Home() {
         <IntentCard
           title="好きな人から返信が来ない"
           description="待つべきか、送るべきか。今日の恋の流れを見ます。"
-          href="/fortune"
+          href="/fortune?type=decision&intent=reply"
           icon={MessageCircle}
           imagePath="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/fortune-cards-DSh1rqf1w5BaG8vMVOjddAtkNvn4Yh.png"
-          buttonText="恋愛運を占う"
+          buttonText="送る/待つを占う"
         />
         <IntentCard
           title="彼の気持ちを知りたい"
           description="過去・現在・未来の3枚で、関係のヒントを受け取ります。"
-          href="/fortune"
+          href="/fortune?type=love&intent=feelings"
           icon={Heart}
           imagePath="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/tarot-dictionary-illustration.jpg-sNlSs4IREALbloxX5pu7RSXeeknuS4.png"
           buttonText="3枚で占う"
@@ -56,7 +56,7 @@ export default function Home() {
         <MenuCard
           title="今日の運勢"
           description="朝の1枚で、今日の流れを前向きに整える"
-          href="/fortune"
+          href="/fortune?type=daily&intent=today"
           icon={Sparkles}
           imagePath="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/tarot-quiz-EVe9gqkW3bSOr347ZCkLBxQFYrWQ6n.png"
           buttonText="今日を占う"

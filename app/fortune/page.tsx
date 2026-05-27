@@ -93,13 +93,35 @@ export default function FortunePage() {
   const [errorDetails, setErrorDetails] = useState<string | null>(null)
   const shuffleTimeoutRef = useRef<NodeJS.Timeout | null>(null)
   const recoveryTimeoutRef = useRef<NodeJS.Timeout | null>(null)
+  const initialIntentHandledRef = useRef(false)
   const [canSkipShuffle, setCanSkipShuffle] = useState(false)
   const currentFortuneTypeRef = useRef<string | null>(null)
+  const entryIntentRef = useRef<string | null>(null)
   const [cardBackImage, setCardBackImage] = useState<string>(getCardBackImage())
+  const [entryIntent, setEntryIntent] = useState<string | null>(null)
 
   useEffect(() => {
     trackGrowthEvent("fortune_view")
   }, [])
+
+  useEffect(() => {
+    if (initialIntentHandledRef.current || typeof window === "undefined") return
+
+    const params = new URLSearchParams(window.location.search)
+    const type = params.get("type")
+    const intent = params.get("intent")
+    const validTypes = new Set(fortuneTypesList.map((item) => item.id))
+
+    if (intent) {
+      entryIntentRef.current = intent
+      setEntryIntent(intent)
+    }
+
+    if (type && validTypes.has(type)) {
+      initialIntentHandledRef.current = true
+      selectFortuneType(type, intent || "direct_link")
+    }
+  }, [fortuneTypesList])
 
   const updateCardBackImage = useCallback(() => {
     const newCardBackImage = getCurrentCardBackUrl()
@@ -188,8 +210,9 @@ export default function FortunePage() {
     }
   }
 
-  const selectFortuneType = (typeId: string) => {
-    trackGrowthEvent("fortune_start", { type: typeId })
+  const selectFortuneType = (typeId: string, sourceIntent = entryIntent || "menu") => {
+    entryIntentRef.current = sourceIntent
+    trackGrowthEvent("fortune_start", { type: typeId, intent: sourceIntent })
 
     // 今日の運勢が選択された時にAndroid広告インターフェースを呼び出し
     if (typeId === "daily") {
@@ -266,6 +289,13 @@ export default function FortunePage() {
           language === "en" ? positions.advice.en : positions.advice.ja,
         ][index] ?? ""
       case "decision":
+        if (entryIntentRef.current === "reply") {
+          return [
+            language === "en" ? "If you message them" : "送る場合",
+            language === "en" ? "If you wait" : "待つ場合",
+          ][index] ?? ""
+        }
+
         return [
           language === "en" ? positions.optionA.en : positions.optionA.ja,
           language === "en" ? positions.optionB.en : positions.optionB.ja,
@@ -486,8 +516,8 @@ export default function FortunePage() {
       )}
 
       <div className="text-center space-y-2">
-        <h1 className="text-3xl font-bold text-amber-400">{t("fortune.title")}</h1>
-        <p className="text-xl text-purple-300">{t("fortune.subtitle")}</p>
+        <h1 className="text-3xl font-bold text-amber-400">{getIntentTitle(entryIntent) || t("fortune.title")}</h1>
+        <p className="text-xl text-purple-300">{getIntentDescription(entryIntent) || t("fortune.subtitle")}</p>
       </div>
 
       {!selectedFortuneType ? (
@@ -765,4 +795,30 @@ export default function FortunePage() {
       </Dialog>
     </div>
   )
+}
+
+function getIntentTitle(intent: string | null) {
+  switch (intent) {
+    case "reply":
+      return "好きな人から返信が来ない"
+    case "feelings":
+      return "彼の気持ちを知りたい"
+    case "today":
+      return "今日の運勢"
+    default:
+      return ""
+  }
+}
+
+function getIntentDescription(intent: string | null) {
+  switch (intent) {
+    case "reply":
+      return "送る場合と待つ場合、2枚のカードで次の動き方を読みます。"
+    case "feelings":
+      return "過去・現在・未来の流れから、相手との関係を読み解きます。"
+    case "today":
+      return "今日のあなたを象徴する1枚を引きます。"
+    default:
+      return ""
+  }
 }
