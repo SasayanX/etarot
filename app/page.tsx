@@ -26,7 +26,7 @@ export default function Home() {
       {canShowLoginBonus && showLoginBonus && <LoginBonusModal isOpen={showLoginBonus} onClose={claimLoginBonus} />}
       
       <div className="text-center space-y-3 px-4">
-        <p className="text-sm font-semibold tracking-[0.3em] uppercase text-amber-300">Positive Tarot</p>
+        <p className="text-sm font-semibold tracking-[0.3em] uppercase text-amber-300">Free Tarot Reading</p>
         <h1 className="text-4xl font-bold text-amber-400">今日の恋、どう動く？</h1>
         <p className="text-lg text-purple-200">
           迷っている気持ちを選ぶだけ。タロットが今のあなたに必要な言葉を届けます。

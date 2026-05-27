@@ -699,6 +699,12 @@ export default function FortunePage() {
                     </div>
                     <div className="w-full md:w-3/4">
                       <h3 className="text-xl font-bold text-purple-300 mb-2">{card.position}</h3>
+                      {language === "ja" && (
+                        <div className="mb-4 rounded-lg border border-amber-400/40 bg-amber-400/10 p-4">
+                          <p className="text-sm font-semibold text-amber-300 mb-2">今のあなたへ</p>
+                          <p className="text-white leading-relaxed">{getPopReading(card, entryIntentRef.current)}</p>
+                        </div>
+                      )}
                       <p className="text-white">{card.reading}</p>
                     </div>
                   </div>
@@ -821,4 +827,95 @@ function getIntentDescription(intent: string | null) {
     default:
       return ""
   }
+}
+
+function getPopReading(card: any, intent: string | null) {
+  const cardName = card?.name || "このカード"
+  const position = card?.position || ""
+  const reversed = Boolean(card?.isReversed)
+  const cardTone = getCardPopTone(card?.id, reversed)
+
+  if (intent === "reply") {
+    if (position.includes("送る")) {
+      return reversed
+        ? `今すぐ長文で送ると、少し重く伝わりそう。送るなら短く、返事を求めない一言がちょうどいいです。${cardName}は「${cardTone}」という空気を出しています。`
+        : `送るなら、今日は軽い一言がよさそう。「おつかれさま」くらいの余白がある言葉が向いています。${cardName}は「${cardTone}」という流れを示しています。`
+    }
+
+    if (position.includes("待つ")) {
+      return reversed
+        ? `ただ待つだけだと、不安が大きくなりやすい日。通知を見張るより、自分の予定をひとつ入れて気持ちを逃がして。${cardName}は「${cardTone}」と伝えています。`
+        : `今日は少し待つ方が流れに合っています。相手の沈黙を悪い意味に決めつけなくて大丈夫。${cardName}は「${cardTone}」と伝えています。`
+    }
+  }
+
+  if (intent === "feelings") {
+    if (position.includes("過去")) {
+      return reversed
+        ? `過去のすれ違いが、まだ少し尾を引いているかも。${cardName}は「${cardTone}」という名残を見せています。`
+        : `これまでの関係には、ちゃんと温度がありました。${cardName}は「${cardTone}」という記憶が相手側にも残っていることを示しています。`
+    }
+
+    if (position.includes("現在")) {
+      return reversed
+        ? `今は相手の気持ちが見えにくい時期。あなたの魅力が足りないのではなく、${cardName}は「${cardTone}」という状態を示しています。`
+        : `今の関係には、まだ動く余地があります。${cardName}は「${cardTone}」という流れなので、自然な接点を増やす方がよさそうです。`
+    }
+
+    if (position.includes("未来")) {
+      return reversed
+        ? `この先は、焦るほど空回りしやすい流れ。${cardName}は「${cardTone}」と出ているので、少しペースを落とすのが良さそうです。`
+        : `未来には小さな進展の芽があります。${cardName}は「${cardTone}」と出ているので、何気ない会話が流れを変えていきそうです。`
+    }
+  }
+
+  if (intent === "today") {
+    return reversed
+      ? `今日は無理に上げなくていい日。${cardName}は「${cardTone}」と出ています。予定を詰め込むより、ひとつ減らすことで運が整いそうです。`
+      : `今日は小さく動くほど流れが良くなりそう。${cardName}は「${cardTone}」と出ています。考えすぎる前にひとつだけ行動してみて。`
+  }
+
+  if (position.includes("恋") || position.includes("過去") || position.includes("現在") || position.includes("未来")) {
+    return reversed
+      ? `今は気持ちが少し絡まりやすい時。${cardName}は「${cardTone}」と出ています。相手の反応を一拍置いて見ると楽になります。`
+      : `恋の流れは、ゆっくり動いています。${cardName}は「${cardTone}」と出ています。自然に話せる空気を作るのが良さそうです。`
+  }
+
+  return reversed
+    ? `今日は少し整える日。${cardName}は「${cardTone}」と出ています。止まっているのではなく調整中です。`
+    : `今日は流れに乗りやすい日。${cardName}は「${cardTone}」と出ています。今できる小さな一歩が運を開きます。`
+}
+
+function getCardPopTone(cardId: number | undefined, reversed: boolean) {
+  const tones = [
+    ["軽く始めてみる", "勢いだけで動くと迷子になりやすい"],
+    ["自分から流れを作れる", "駆け引きしすぎると本音が見えにくい"],
+    ["まだ見えていない本音がある", "考えすぎて沈黙を深読みしやすい"],
+    ["やさしさが関係を育てる", "尽くしすぎると自分が疲れやすい"],
+    ["落ち着いた態度が信頼になる", "正しさを押し出すと距離ができやすい"],
+    ["誠実な言葉が効く", "常識に縛られて気持ちを出しにくい"],
+    ["気持ちが通い合う余地がある", "迷いが出て選びきれない"],
+    ["一歩進める力がある", "急ぎすぎると相手が追いつけない"],
+    ["やわらかく粘るほど強い", "我慢しすぎて本音が薄まりやすい"],
+    ["ひとりで整える時間が効く", "閉じこもるとチャンスを見逃しやすい"],
+    ["流れが切り替わる前触れ", "タイミングがずれて焦りやすい"],
+    ["公平に見るほど答えが出る", "白黒つけすぎると苦しくなる"],
+    ["待つことで見えるものがある", "待ちすぎて動けなくなりやすい"],
+    ["関係が新しい形に変わる", "終わりを怖がって古い形にしがみつきやすい"],
+    ["ちょうどいい距離感が鍵になる", "中途半端な態度で流れがぼやけやすい"],
+    ["強い執着や欲が見えている", "不安から追いかけすぎやすい"],
+    ["思い込みが一度崩れて本音が出る", "感情的にぶつけると余計にこじれやすい"],
+    ["希望が戻ってくる", "期待しすぎて小さな進展を見落としやすい"],
+    ["曖昧さの中にヒントがある", "不安が想像を大きくしやすい"],
+    ["明るい進展が期待できる", "楽観しすぎると大事なサインを見落としやすい"],
+    ["もう一度向き合うタイミング", "過去の後悔に引っ張られやすい"],
+    ["ひとつの区切りと完成が近い", "完璧を求めすぎて次に進みにくい"],
+  ]
+
+  const tone = typeof cardId === "number" ? tones[cardId] : undefined
+  if (!tone) {
+    return reversed ? "今は少し慎重に整える" : "小さな流れが動き始める"
+  }
+
+  return reversed ? tone[1] : tone[0]
 }
