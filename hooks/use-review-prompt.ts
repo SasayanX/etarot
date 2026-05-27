@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { formatDateKey } from "@/utils/date-key"
 
 /**
  * レビュー依頼のロジックを管理するカスタムフック
@@ -10,9 +11,23 @@ import { useState, useEffect } from "react"
  * - まだレビュー依頼を表示していない、または前回表示から7日以上経過
  * - 1日に1回まで表示
  */
-export function useReviewPrompt() {
+export function useReviewPrompt({ autoCheck = true }: { autoCheck?: boolean } = {}) {
   const [showReviewPrompt, setShowReviewPrompt] = useState(false)
   const [initialized, setInitialized] = useState(false)
+
+  const canShowReviewPrompt = () => {
+    if (typeof window === "undefined") return false
+
+    const hasShownReview = localStorage.getItem("hasShownReviewPrompt") === "true"
+    const lastReviewPromptDate = localStorage.getItem("lastReviewPromptDate")
+    const today = getTodayKey()
+
+    if (hasShownReview || lastReviewPromptDate === today) {
+      return false
+    }
+
+    return !lastReviewPromptDate || isMoreThanDaysAgo(lastReviewPromptDate, 7)
+  }
 
   useEffect(() => {
     const checkReviewPrompt = () => {
@@ -25,38 +40,17 @@ export function useReviewPrompt() {
         const newUsageCount = usageCount + 1
         localStorage.setItem("appUsageCount", newUsageCount.toString())
 
-        // レビュー依頼を表示したかどうか
-        const hasShownReview = localStorage.getItem("hasShownReviewPrompt") === "true"
-        const lastReviewPromptDate = localStorage.getItem("lastReviewPromptDate")
-        const today = new Date().toISOString().split("T")[0] // YYYY-MM-DD
-
         console.log("Usage count:", newUsageCount)
-        console.log("Has shown review:", hasShownReview)
-        console.log("Last review prompt date:", lastReviewPromptDate)
 
         // 表示条件:
         // 1. 5回以上使用している
         // 2. まだ一度も表示していない、または前回表示から7日以上経過
         // 3. 今日まだ表示していない
-        if (newUsageCount >= 5) {
-          console.log("✅ 使用回数が5回以上")
-          
-          // 初回の場合（まだ一度も表示していない）
-          if (!hasShownReview && !lastReviewPromptDate) {
-            console.log("✅ 初回表示条件を満たしています")
-            setShowReviewPrompt(true)
-          }
-          // 再表示の場合（7日以上経過 && 今日はまだ表示していない）
-          else if (!hasShownReview && lastReviewPromptDate) {
-            const canShowAgain = isMoreThanDaysAgo(lastReviewPromptDate, 7) && lastReviewPromptDate !== today
-            console.log("再表示チェック:", { canShowAgain, lastReviewPromptDate, today })
-            if (canShowAgain) {
-              console.log("✅ 再表示条件を満たしています")
-              setShowReviewPrompt(true)
-            }
-          }
+        if (newUsageCount >= 5 && canShowReviewPrompt()) {
+          console.log("✅ レビュー表示条件を満たしています")
+          setShowReviewPrompt(true)
         } else {
-          console.log("❌ 使用回数が5回未満:", newUsageCount)
+          console.log("❌ レビュー表示条件を満たしていません:", newUsageCount)
         }
 
         setInitialized(true)
@@ -64,6 +58,11 @@ export function useReviewPrompt() {
         console.error("Error checking review prompt:", error)
         setInitialized(true)
       }
+    }
+
+    if (!autoCheck) {
+      setInitialized(true)
+      return undefined
     }
 
     if (!initialized) {
@@ -74,14 +73,16 @@ export function useReviewPrompt() {
 
       return () => clearTimeout(timer)
     }
-  }, [initialized])
+
+    return undefined
+  }, [autoCheck, initialized])
 
   // レビュー依頼を閉じた後の処理
   const dismissReviewPrompt = () => {
     if (typeof window === "undefined") return
 
     try {
-      const today = new Date().toISOString().split("T")[0]
+      const today = getTodayKey()
       localStorage.setItem("lastReviewPromptDate", today)
       setShowReviewPrompt(false)
     } catch (error) {
@@ -95,7 +96,7 @@ export function useReviewPrompt() {
     if (typeof window === "undefined") return
 
     try {
-      const today = new Date().toISOString().split("T")[0]
+      const today = getTodayKey()
       localStorage.setItem("hasShownReviewPrompt", "true")
       localStorage.setItem("lastReviewPromptDate", today)
       setShowReviewPrompt(false)
@@ -105,10 +106,24 @@ export function useReviewPrompt() {
     }
   }
 
+  const requestReviewAfterPositiveMoment = () => {
+    if (typeof window === "undefined") return
+
+    try {
+      const fortuneCompletions = Number.parseInt(localStorage.getItem("fortuneCompletionCount") || "0", 10) || 0
+      if (fortuneCompletions >= 3 && canShowReviewPrompt()) {
+        setShowReviewPrompt(true)
+      }
+    } catch (error) {
+      console.error("Error requesting review after positive moment:", error)
+    }
+  }
+
   return {
     showReviewPrompt,
     dismissReviewPrompt,
     markReviewShown,
+    requestReviewAfterPositiveMoment,
     initialized,
   }
 }
@@ -128,3 +143,6 @@ function isMoreThanDaysAgo(dateString: string, days: number): boolean {
   }
 }
 
+function getTodayKey(): string {
+  return formatDateKey(new Date())
+}

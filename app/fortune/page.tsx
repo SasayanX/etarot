@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, useCallback } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
-import { Loader2, ExternalLink, RefreshCw, AlertCircle } from "lucide-react"
+import { Loader2, ExternalLink, RefreshCw, AlertCircle, Share2, Star } from "lucide-react"
 import { useSettings } from "@/contexts/settings-context"
 import FortuneCard from "@/components/fortune-card"
 import { useShop } from "@/contexts/shop-context"
@@ -12,6 +12,9 @@ import { getCardImageUrl } from "./card-image-urls"
 import { useLanguage } from "@/contexts/language-context"
 import "./fortune.css"
 import { LydiaMessage } from "@/components/fortune/lydia-message"
+import { ReviewPromptDialog } from "@/components/review-prompt-dialog"
+import { useReviewPrompt } from "@/hooks/use-review-prompt"
+import { incrementGrowthCounter, trackGrowthEvent } from "@/utils/growth-events"
 
 // データファイルからインポート
 import { getRandomSafeCards, getLuckyItems, getCardBackImage, getCurrentCardBackUrl } from "@/data/fortune-card-data"
@@ -81,8 +84,10 @@ export default function FortunePage() {
   const [readingResult, setReadingResult] = useState<any | null>(null)
   const [shuffleCards, setShuffleCards] = useState<ShuffleCard[]>([])
   const { playSound, speak, textToSpeechEnabled, stopSpeaking } = useSettings()
-  const { addPoints, selectedSuit } = useShop()
-  const [loadErrors, setLoadErrors] = useState<string[]>([])
+  const { addPoints } = useShop()
+  const { showReviewPrompt, dismissReviewPrompt, markReviewShown, requestReviewAfterPositiveMoment } = useReviewPrompt({
+    autoCheck: false,
+  })
   const [isLoading, setIsLoading] = useState(false)
   const [cardLoadError, setCardLoadError] = useState(false)
   const [errorDetails, setErrorDetails] = useState<string | null>(null)
@@ -91,6 +96,10 @@ export default function FortunePage() {
   const [canSkipShuffle, setCanSkipShuffle] = useState(false)
   const currentFortuneTypeRef = useRef<string | null>(null)
   const [cardBackImage, setCardBackImage] = useState<string>(getCardBackImage())
+
+  useEffect(() => {
+    trackGrowthEvent("fortune_view")
+  }, [])
 
   const updateCardBackImage = useCallback(() => {
     const newCardBackImage = getCurrentCardBackUrl()
@@ -180,6 +189,8 @@ export default function FortunePage() {
   }
 
   const selectFortuneType = (typeId: string) => {
+    trackGrowthEvent("fortune_start", { type: typeId })
+
     // 今日の運勢が選択された時にAndroid広告インターフェースを呼び出し
     if (typeId === "daily") {
       try {
@@ -241,24 +252,24 @@ export default function FortunePage() {
           language === "en" ? positions.past.en : positions.past.ja,
           language === "en" ? positions.present.en : positions.present.ja,
           language === "en" ? positions.future.en : positions.future.ja,
-        ][index]
+        ][index] ?? ""
       case "career":
         return [
           language === "en" ? positions.current.en : positions.current.ja,
           language === "en" ? positions.challenge.en : positions.challenge.ja,
           language === "en" ? positions.advice.en : positions.advice.ja,
-        ][index]
+        ][index] ?? ""
       case "money":
         return [
           language === "en" ? positions.current.en : positions.current.ja,
           language === "en" ? positions.challenge.en : positions.challenge.ja,
           language === "en" ? positions.advice.en : positions.advice.ja,
-        ][index]
+        ][index] ?? ""
       case "decision":
         return [
           language === "en" ? positions.optionA.en : positions.optionA.ja,
           language === "en" ? positions.optionB.en : positions.optionB.ja,
-        ][index]
+        ][index] ?? ""
       default:
         return `${language === "en" ? "Position" : "ポジション"}${index + 1}`
     }
@@ -305,7 +316,6 @@ export default function FortunePage() {
     setFlippedCards([])
     setIsReading(false)
     setReadingResult(null)
-    setLoadErrors([])
     setCardLoadError(false)
     setErrorDetails(null)
     setIsLoading(false)
@@ -339,38 +349,33 @@ export default function FortunePage() {
       const overallReading = ""
       let luckyItem = ""
 
-      const cardReadings = cards.map((card, index) => {
+      const pickLuckyItem = (cardId: number) => {
+        const items = getLuckyItems(cardId, language)
+        return items[Math.floor(Math.random() * items.length)] ?? ""
+      }
+
+      const cardReadings = cards.map((card) => {
         let reading = ""
         switch (typeId) {
           case "daily":
             reading = getCardReading(card.id, card.isReversed, language)
-            luckyItem = getLuckyItems(card.id, language)[
-              Math.floor(Math.random() * getLuckyItems(card.id, language).length)
-            ]
+            luckyItem = pickLuckyItem(card.id)
             break
           case "love":
             reading = getLoveReading(card.id, card.position, card.isReversed, language)
-            luckyItem = getLuckyItems(card.id, language)[
-              Math.floor(Math.random() * getLuckyItems(card.id, language).length)
-            ]
+            luckyItem = pickLuckyItem(card.id)
             break
           case "career":
             reading = getCareerReading(card.id, card.position, card.isReversed, language)
-            luckyItem = getLuckyItems(card.id, language)[
-              Math.floor(Math.random() * getLuckyItems(card.id, language).length)
-            ]
+            luckyItem = pickLuckyItem(card.id)
             break
           case "money":
             reading = getMoneyReading(card.id, card.position, card.isReversed, language)
-            luckyItem = getLuckyItems(card.id, language)[
-              Math.floor(Math.random() * getLuckyItems(card.id, language).length)
-            ]
+            luckyItem = pickLuckyItem(card.id)
             break
           case "decision":
             reading = getDecisionReading(card.id, card.position, card.isReversed, language)
-            luckyItem = getLuckyItems(card.id, language)[
-              Math.floor(Math.random() * getLuckyItems(card.id, language).length)
-            ]
+            luckyItem = pickLuckyItem(card.id)
             break
           default:
             reading = language === "en" ? "No reading available" : "占いの結果はありません"
@@ -383,6 +388,17 @@ export default function FortunePage() {
         cards: cardReadings,
         luckyItem: luckyItem,
       })
+
+      if (typeof window !== "undefined") {
+        localStorage.setItem("hasCompletedFortune", "true")
+        const completionCount = incrementGrowthCounter("fortuneCompletionCount")
+        trackGrowthEvent("fortune_complete", {
+          type: typeId,
+          cards: cardReadings.length,
+          completionCount,
+        })
+        setTimeout(() => requestReviewAfterPositiveMoment(), 1200)
+      }
 
       // 読み上げ機能
       if (textToSpeechEnabled && speak) {
@@ -408,8 +424,67 @@ export default function FortunePage() {
     }
   }
 
+  const getShareText = () => {
+    const firstCard = readingResult?.cards?.[0]
+    const cardName = firstCard?.name ? `「${firstCard.name}」` : "タロットカード"
+    const reading = firstCard?.reading ? String(firstCard.reading).slice(0, 80) : "今日の運勢を占いました。"
+
+    if (language === "en") {
+      return `My tarot card today is ${firstCard?.name || "a tarot card"}.\n${reading}\nTry your reading too.`
+    }
+
+    return `今日のタロットは${cardName}でした。\n${reading}...\nあなたも今日の恋と運勢を占ってみて。`
+  }
+
+  const shareReading = async () => {
+    if (!readingResult) return
+
+    const shareData = {
+      title: language === "en" ? "My tarot reading" : "今日のタロット占い",
+      text: getShareText(),
+      url: "https://play.google.com/store/apps/details?id=com.ryuka.kanau_kiryu",
+    }
+
+    trackGrowthEvent("share_click", {
+      type: currentFortuneTypeRef.current,
+      supportsNativeShare: typeof navigator !== "undefined" && "share" in navigator,
+    })
+
+    try {
+      if (typeof navigator !== "undefined" && navigator.share) {
+        await navigator.share(shareData)
+        trackGrowthEvent("share_success", { type: currentFortuneTypeRef.current })
+        return
+      }
+
+      await navigator.clipboard.writeText(`${shareData.text}\n${shareData.url}`)
+      trackGrowthEvent("share_copy_success", { type: currentFortuneTypeRef.current })
+      alert(language === "en" ? "Reading copied to clipboard." : "占い結果をコピーしました。")
+    } catch (error) {
+      console.warn("Share failed:", error)
+      trackGrowthEvent("share_failed", { type: currentFortuneTypeRef.current })
+    }
+  }
+
   return (
     <div className="py-8 space-y-8">
+      {showReviewPrompt && (
+        <ReviewPromptDialog
+          isOpen={showReviewPrompt}
+          onReview={() => {
+            trackGrowthEvent("review_click", { source: "fortune_result" })
+            // 「開いただけ」だとレビュー完了扱いにしない
+            // ただし本日は再表示されないようにする
+            dismissReviewPrompt()
+          }}
+          onDismiss={() => {
+            trackGrowthEvent("review_dismiss", { source: "fortune_result" })
+            dismissReviewPrompt()
+          }}
+          onAlreadyReviewed={markReviewShown}
+        />
+      )}
+
       <div className="text-center space-y-2">
         <h1 className="text-3xl font-bold text-amber-400">{t("fortune.title")}</h1>
         <p className="text-xl text-purple-300">{t("fortune.subtitle")}</p>
@@ -627,6 +702,7 @@ export default function FortunePage() {
                         amazonUrl = `https://www.amazon.com/s?k=${searchQuery}&tag=${affiliateId}`
                       }
 
+                      trackGrowthEvent("lucky_item_click", { item: readingResult.luckyItem })
                       window.open(amazonUrl, "_blank")
                     }}
                   >
@@ -638,6 +714,30 @@ export default function FortunePage() {
             )}
 
             <LydiaMessage className="mt-6" />
+
+            <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <Button
+                className="bg-amber-500 hover:bg-amber-400 text-black font-semibold"
+                onClick={shareReading}
+              >
+                <Share2 className="mr-2 h-4 w-4" />
+                {language === "en" ? "Share this reading" : "結果をシェア"}
+              </Button>
+              <Button
+                variant="outline"
+                className="border-purple-500 text-purple-200 hover:bg-purple-900/50"
+                onClick={() => {
+                  trackGrowthEvent("review_manual_open", { source: "fortune_result" })
+                    // 「開いただけ」ではレビュー完了扱いにしない
+                    dismissReviewPrompt()
+                  const packageName = "com.ryuka.kanau_kiryu"
+                  window.location.href = `market://details?id=${packageName}`
+                }}
+              >
+                <Star className="mr-2 h-4 w-4" />
+                {language === "en" ? "Review the app" : "応援レビューを書く"}
+              </Button>
+            </div>
           </div>
 
           <div className="flex justify-center">
