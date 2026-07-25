@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 
 const LYDIA_IMAGE_SRC = "/lydia-reading-message.webp"
-const LYDIA_URL = "https://protarot.jp/"
+const LYDIA_URL = "https://protarot2.netlify.app/"
 
 interface LydiaMessageProps {
   className?: string
